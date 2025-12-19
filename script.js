@@ -151,31 +151,22 @@ function initDynamicNavigation(data) {
 function updateMobileHeroCard(data) {
     const mobileCardName = document.querySelector('.mobile-card-info h3');
     if (mobileCardName) {
-        mobileCardName.textContent = data.personal?.name || 'Talha Ahmed';
+        mobileCardName.textContent = data.personal?.name || 'Talha Gardazi';
     }
     const mobileCardRole = document.querySelector('.mobile-card-info span');
     if (mobileCardRole) {
-        mobileCardRole.textContent = data.personal?.role || 'Senior Java Backend Engineer';
+        mobileCardRole.textContent = data.personal?.role || 'Full-Stack Software Engineer';
     }
     
-    // Update mobile stats
+    // Update mobile stats from data.mobileStats
     const mobileStats = document.querySelector('.mobile-stats');
-    if (mobileStats && data.metrics) {
-        const yearsExp = data.personal?.yearsExperience || '8+';
-        mobileStats.innerHTML = `
+    if (mobileStats && data.mobileStats) {
+        mobileStats.innerHTML = data.mobileStats.map(stat => `
             <div class="mobile-stat">
-                <span class="stat-number">${yearsExp}</span>
-                <span class="stat-label">Years Exp</span>
+                <span class="stat-number">${stat.number}</span>
+                <span class="stat-label">${stat.label}</span>
             </div>
-            <div class="mobile-stat">
-                <span class="stat-number">50M+</span>
-                <span class="stat-label">Users Served</span>
-            </div>
-            <div class="mobile-stat">
-                <span class="stat-number">${data.metrics[2]?.value || '99.99%'}</span>
-                <span class="stat-label">Uptime</span>
-            </div>
-        `;
+        `).join('');
     }
     
     // Update mobile tags
@@ -188,30 +179,19 @@ function updateMobileHeroCard(data) {
 }
 
 /**
- * Update chat messages
+ * Update chat messages from data.js
  */
 function updateChatMessages(data) {
-    const name = data.personal?.name || 'Talha Ahmed';
-    const role = data.personal?.role || 'Senior Java Backend Engineer';
-    const yearsExp = data.personal?.yearsExperience || '8+';
+    if (!data.chatMessages || data.chatMessages.length < 2) return;
     
     const userMsg = document.querySelector('.chat-message.user .message-content');
     const assistantMsg = document.querySelector('.chat-message.assistant .message-content');
     
-    if (userMsg) {
-        userMsg.textContent = `Tell me about ${name}'s experience`;
+    if (userMsg && data.chatMessages[0]) {
+        userMsg.textContent = data.chatMessages[0].message;
     }
-    if (assistantMsg && data.experience && data.experience[0]) {
-        const exp = data.experience[0];
-        assistantMsg.innerHTML = `
-            <p><strong>${name}</strong> is a ${role} with ${yearsExp} years of experience building distributed systems at scale.</p>
-            <p>Key highlights:</p>
-            <ul>
-                <li>Led backend architecture at <strong>${exp.company}</strong> serving 50M+ users</li>
-                <li>${exp.achievements[0]}</li>
-                <li>Open source contributor to Spring Framework</li>
-            </ul>
-        `;
+    if (assistantMsg && data.chatMessages[1]) {
+        assistantMsg.innerHTML = data.chatMessages[1].message;
     }
 }
 
@@ -224,39 +204,67 @@ function updateCompaniesSection(data) {
     const companyLogos = document.querySelector('.company-logos');
     if (!companyLogos) return;
     
-    companyLogos.innerHTML = data.companies.map(company => `
-        <div class="logo-item">
-            <span class="company-logo">${company.icon} ${company.name}</span>
-        </div>
-    `).join('');
+    companyLogos.innerHTML = data.companies.map(company => {
+        // Check if icon is an SVG path or emoji
+        const iconHtml = company.icon.endsWith('.svg') 
+            ? `<img src="${company.icon}" alt="${company.name}" class="company-icon" />` 
+            : `<span class="company-emoji">${company.icon}</span>`;
+        return `
+            <div class="logo-item">
+                <span class="company-logo">${iconHtml} ${company.name}</span>
+            </div>
+        `;
+    }).join('');
 }
 
 /**
  * Update feature cards with metrics
  */
 function updateFeatureCards(data) {
-    if (!data.features || !data.metrics) return;
+    if (!data.features) return;
     
-    // Update metrics in the terminal demo
-    const metricRows = document.querySelectorAll('.metric-row');
-    if (metricRows.length > 0 && data.metrics) {
-        data.metrics.forEach((metric, index) => {
-            if (metricRows[index]) {
-                const row = metricRows[index];
-                const label = row.querySelector('.metric-label');
-                const fill = row.querySelector('.metric-fill');
-                const value = row.querySelector('.metric-value');
+    // Update feature card content (title, description, link) from data.js
+    const featureCards = document.querySelectorAll('.feature-card');
+    if (featureCards.length > 0 && data.features) {
+        data.features.forEach((feature, index) => {
+            if (featureCards[index]) {
+                const card = featureCards[index];
+                const title = card.querySelector('.feature-title');
+                const desc = card.querySelector('.feature-desc');
+                const link = card.querySelector('.feature-link');
                 
-                if (label) label.textContent = metric.label;
-                if (fill) fill.style.width = `${metric.percentage}%`;
-                if (value) {
-                    value.textContent = metric.value;
-                    if (metric.status === 'good') {
-                        value.classList.add('good');
-                    }
+                if (title) title.textContent = feature.title;
+                if (desc) desc.textContent = feature.description;
+                if (link) {
+                    link.href = feature.link;
+                    link.textContent = feature.linkText;
                 }
             }
         });
+    }
+    
+    // Update metrics in the terminal demo (if metrics data exists)
+    if (data.metrics) {
+        const metricRows = document.querySelectorAll('.metric-row');
+        if (metricRows.length > 0) {
+            data.metrics.forEach((metric, index) => {
+                if (metricRows[index]) {
+                    const row = metricRows[index];
+                    const label = row.querySelector('.metric-label');
+                    const fill = row.querySelector('.metric-fill');
+                    const value = row.querySelector('.metric-value');
+                    
+                    if (label) label.textContent = metric.label;
+                    if (fill) fill.style.width = `${metric.percentage}%`;
+                    if (value) {
+                        value.textContent = metric.value;
+                        if (metric.status === 'good') {
+                            value.classList.add('good');
+                        }
+                    }
+                }
+            });
+        }
     }
 }
 
@@ -269,24 +277,31 @@ function updateExperienceTimeline(data) {
     const timeline = document.querySelector('.timeline');
     if (!timeline) return;
     
-    timeline.innerHTML = data.experience.map(exp => `
-        <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-                <div class="company-header">
-                    <h3>${exp.company}</h3>
-                    <span class="role">${exp.role}</span>
-                    <span class="duration">${exp.duration}</span>
-                </div>
-                <ul class="achievements">
-                    ${exp.achievements.map(a => `<li>${a}</li>`).join('')}
-                </ul>
-                <div class="tech-tags">
-                    ${exp.technologies.map(t => `<span>${t}</span>`).join('')}
+    timeline.innerHTML = data.experience.map(exp => {
+        // Check if icon is an SVG path or emoji
+        const iconHtml = exp.icon && exp.icon.endsWith('.svg') 
+            ? `<img src="${exp.icon}" alt="${exp.company}" class="company-icon" />` 
+            : '';
+        return `
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="company-header">
+                        ${iconHtml}
+                        <h3>${exp.company}</h3>
+                        <span class="role">${exp.role}</span>
+                        <span class="duration">${exp.duration}</span>
+                    </div>
+                    <ul class="achievements">
+                        ${exp.achievements.map(a => `<li>${a}</li>`).join('')}
+                    </ul>
+                    <div class="tech-tags">
+                        ${exp.technologies.map(t => `<span>${t}</span>`).join('')}
+                    </div>
                 </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 /**
@@ -384,9 +399,30 @@ function updateContactSection(data) {
         contactSubtitle.textContent = personal.availabilityNote;
     }
     
-    // Update contact cards
+    // Build contact cards - use portfolio instead of twitter if twitter is empty
     const contactGrid = document.querySelector('.contact-grid');
     if (contactGrid) {
+        let fourthCard;
+        if (social.twitter && social.twitterHandle) {
+            fourthCard = `
+                <div class="contact-card">
+                    <div class="contact-icon">𝕏</div>
+                    <h3>Twitter</h3>
+                    <a href="${social.twitter}">${social.twitterHandle}</a>
+                </div>
+            `;
+        } else if (social.portfolio && social.portfolioHandle) {
+            fourthCard = `
+                <div class="contact-card">
+                    <div class="contact-icon">🌐</div>
+                    <h3>Portfolio</h3>
+                    <a href="${social.portfolio}">${social.portfolioHandle}</a>
+                </div>
+            `;
+        } else {
+            fourthCard = '';
+        }
+        
         contactGrid.innerHTML = `
             <div class="contact-card">
                 <div class="contact-icon">📧</div>
@@ -403,11 +439,7 @@ function updateContactSection(data) {
                 <h3>GitHub</h3>
                 <a href="${social.github}">${social.githubHandle}</a>
             </div>
-            <div class="contact-card">
-                <div class="contact-icon">𝕏</div>
-                <h3>Twitter</h3>
-                <a href="${social.twitter}">${social.twitterHandle}</a>
-            </div>
+            ${fourthCard}
         `;
     }
     
@@ -415,6 +447,12 @@ function updateContactSection(data) {
     const ctaLink = document.querySelector('.cta-box a[href^="mailto"]');
     if (ctaLink && personal.email) {
         ctaLink.setAttribute('href', `mailto:${personal.email}`);
+    }
+    
+    // Also update CTA button by id
+    const ctaEmailBtn = document.getElementById('ctaEmailBtn');
+    if (ctaEmailBtn && personal.email) {
+        ctaEmailBtn.setAttribute('href', `mailto:${personal.email}`);
     }
 }
 
@@ -428,7 +466,7 @@ function updateFooter(data) {
     if (!personal) return;
     
     const firstName = personal.firstName || 'Talha';
-    const lastName = personal.lastName || 'Ahmed';
+    const lastName = personal.lastName || 'Gardazi';
     const logoTextValue = `${firstName.toLowerCase()}.${lastName.toLowerCase()}`;
     
     // Update footer logo
@@ -452,11 +490,19 @@ function updateFooter(data) {
     if (social) {
         const footerGithub = document.getElementById('footerGithub');
         const footerLinkedin = document.getElementById('footerLinkedin');
-        const footerTwitter = document.getElementById('footerTwitter');
+        const footerThird = document.getElementById('footerTwitter') || document.getElementById('footerPortfolio');
         
         if (footerGithub) footerGithub.href = social.github;
         if (footerLinkedin) footerLinkedin.href = social.linkedin;
-        if (footerTwitter) footerTwitter.href = social.twitter;
+        
+        // Use portfolio if twitter is empty
+        if (footerThird) {
+            if (social.twitter) {
+                footerThird.href = social.twitter;
+            } else if (social.portfolio) {
+                footerThird.href = social.portfolio;
+            }
+        }
     }
     
     // Update copyright and badges
@@ -1431,114 +1477,15 @@ style.textContent = `
 document.head.appendChild(style);
 
 /**
- * Dynamic Content Renderer
- * Uses portfolioData from data.js to render dynamic content
- */
-function initDynamicContent() {
-    if (typeof portfolioData === 'undefined') {
-        console.warn('portfolioData not found. Using static content.');
-        return;
-    }
-
-    // Update personal info
-    updatePersonalInfo();
-    
-    // Update skills section dynamically
-    renderSkills();
-    
-    // Re-initialize skill bars after dynamic render
-    setTimeout(initSkillBars, 100);
-}
-
-function updatePersonalInfo() {
-    const data = portfolioData.personal;
-    
-    // Update page title
-    document.title = `${data.name} | ${data.role}`;
-    
-    // Update logo text
-    const logoTexts = document.querySelectorAll('.logo-text');
-    logoTexts.forEach(el => {
-        el.textContent = `${data.firstName.toLowerCase()}.${data.lastName.toLowerCase()}`;
-    });
-}
-
-function renderSkills() {
-    const skillsGrid = document.querySelector('.skills-grid');
-    if (!skillsGrid || !portfolioData.skills) return;
-    
-    skillsGrid.innerHTML = portfolioData.skills.map(category => `
-        <div class="skill-category">
-            <h3>
-                <span class="category-icon">${category.icon}</span>
-                ${category.category}
-            </h3>
-            <div class="skill-list">
-                ${category.items.map(skill => `
-                    <div class="skill-item">
-                        <span class="skill-name">${skill.name}</span>
-                        <div class="skill-bar">
-                            <div class="skill-fill" data-width="${skill.level}%" style="width: 0%"></div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `).join('');
-    
-    // Animate bars after a short delay to allow rendering
-    setTimeout(() => {
-        animateSkillBars();
-    }, 200);
-}
-
-function animateSkillBars() {
-    const skillBars = document.querySelectorAll('.skill-fill[data-width]');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const bar = entry.target;
-                const targetWidth = bar.getAttribute('data-width');
-                
-                if (targetWidth) {
-                    setTimeout(() => {
-                        bar.style.width = targetWidth;
-                    }, 100 + Math.random() * 200); // Stagger animation
-                }
-                
-                observer.unobserve(bar);
-            }
-        });
-    }, { 
-        threshold: 0.1,
-        rootMargin: '50px'
-    });
-
-    skillBars.forEach(bar => {
-        observer.observe(bar);
-    });
-}
-
-// Call dynamic content initialization after DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(initDynamicContent, 50);
-    });
-} else {
-    setTimeout(initDynamicContent, 50);
-}
-
-/**
  * Console Easter Egg
  */
 console.log(`
-%c👨‍💻 Talha Ahmed - Senior Java Backend Engineer
+%c👨‍💻 Syed Talha Ahmed Gardazi - Full-Stack Software Engineer
 
 %cLooking for the source code? 
 I appreciate your curiosity!
 
-Feel free to reach out: Talha@TalhaAhmed.dev
+Feel free to reach out: smilingtalha@gmail.com
 
 Built with vanilla HTML, CSS, and JavaScript.
 Inspired by Cursor's beautiful design.
@@ -1546,3 +1493,50 @@ Inspired by Cursor's beautiful design.
 'font-size: 18px; font-weight: bold; color: #6366f1;',
 'font-size: 12px; color: #a1a1aa;'
 );
+
+/**
+ * Music Player Functionality
+ */
+function initMusicPlayer() {
+    const musicToggle = document.getElementById('musicToggle');
+    const bgMusic = document.getElementById('bgMusic');
+    const musicIcon = document.getElementById('musicIcon');
+    
+    if (!musicToggle || !bgMusic || !musicIcon) return;
+    
+    let isPlaying = false;
+    
+    musicToggle.addEventListener('click', () => {
+        if (isPlaying) {
+            bgMusic.pause();
+            musicIcon.src = 'assets/icons/soundoff.png';
+            musicToggle.classList.remove('playing');
+            musicToggle.title = 'Play background music';
+        } else {
+            bgMusic.play().catch(e => {
+                console.log('Audio playback failed:', e);
+            });
+            musicIcon.src = 'assets/icons/soundon.png';
+            musicToggle.classList.add('playing');
+            musicToggle.title = 'Pause background music';
+        }
+        isPlaying = !isPlaying;
+    });
+    
+    // Update icon when music ends (shouldn't happen with loop, but just in case)
+    bgMusic.addEventListener('ended', () => {
+        isPlaying = false;
+        musicIcon.src = 'assets/icons/soundoff.png';
+        musicToggle.classList.remove('playing');
+    });
+    
+    // Set initial volume
+    bgMusic.volume = 0.3;
+}
+
+// Initialize music player when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMusicPlayer);
+} else {
+    initMusicPlayer();
+}

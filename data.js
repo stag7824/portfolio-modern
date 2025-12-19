@@ -5,29 +5,31 @@
 const portfolioData = {
     // Personal Information
     personal: {
-        name: "Talha Ahmed",
+        name: "Syed Talha Ahmed Gardazi",
         firstName: "Talha",
-        lastName: "Ahmed",
-        role: "Senior Java Backend Engineer",
+        lastName: "Gardazi",
+        role: "Full-Stack Software Engineer",
         tagline: "Building robust backend systems",
         description: "crafting scalable solutions",
-        yearsExperience: "8+",
-        subtitle: "8+ years designing distributed systems, microservices, and high-performance APIs at scale.",
-        location: "San Francisco, CA",
-        email: "Talha@TalhaAhmed.dev",
-        website: "TalhaAhmed.dev",
+        yearsExperience: "3+",
+        subtitle: "3+ years in fintech building high-throughput reporting and loan systems. MSc in Autonomous Systems at ELTE.",
+        location: "Budapest, Hungary",
+        email: "smilingtalha@gmail.com",
+        website: "portfolio.bugbrew.tech",
         available: true,
         availabilityNote: "Open for senior backend roles, technical consulting, and interesting collaboration opportunities."
     },
 
     // Social Links
     social: {
-        github: "https://github.com/TalhaAhmed",
-        githubHandle: "@TalhaAhmed",
-        linkedin: "https://linkedin.com/in/TalhaAhmed-dev",
-        linkedinHandle: "/in/TalhaAhmed-dev",
-        twitter: "https://twitter.com/TalhaAhmed_dev",
-        twitterHandle: "@TalhaAhmed_dev"
+        github: "https://github.com/stag7824",
+        githubHandle: "@stag7824",
+        linkedin: "https://linkedin.com/in/stagify",
+        linkedinHandle: "/in/stagify",
+        portfolio: "https://portfolio.bugbrew.tech",
+        portfolioHandle: "portfolio.bugbrew.tech",
+        twitter: "",
+        twitterHandle: ""
     },
 
     // Navigation Items
@@ -42,19 +44,26 @@ const portfolioData = {
     // Expertise areas (shown in code editor)
     expertise: [
         "Microservices",
-        "Distributed Systems", 
-        "Spring Boot",
-        "Kubernetes",
-        "Event-Driven Architecture"
+        "Node.js/TypeScript",
+        "React/Next.js",
+        "ASP.NET Core",
+        "Docker/CI-CD"
     ],
 
-    // Companies/Logos section
+    // Mobile hero stats
+    mobileStats: [
+        { number: "3+", label: "Years Exp" },
+        { number: "≈40%", label: "Faster Reports" },
+        { number: "2×", label: "Concurrency" }
+    ],
+
+    // Companies/Logos section (actual organizations worked with)
     companies: [
-        { name: "TechCorp", icon: "🏢" },
-        { name: "StartupX", icon: "🚀" },
-        { name: "CloudScale", icon: "☁️" },
-        { name: "DataFlow", icon: "📊" },
-        { name: "SecureAPI", icon: "🔐" }
+        { name: "Bank Al Habib", icon: "assets/icons/bahl.svg" },
+        { name: "Mindstorm Studios", icon: "assets/icons/mindstorm.svg" },
+        { name: "The Citizens Foundation", icon: "assets/icons/tcf.svg" },
+        { name: "IBA Karachi", icon: "🎓" },
+        { name: "ELTE Budapest", icon: "🇭🇺" }
     ],
 
     // Performance Metrics (shown in terminal demo)
@@ -67,38 +76,41 @@ const portfolioData = {
     // Experience/Work History
     experience: [
         {
-            company: "TechCorp Inc.",
-            role: "Senior Backend Engineer",
-            duration: "2021 - Present",
-            achievements: [
-                "Led migration of monolithic application to microservices, reducing deployment time by 80%",
-                "Architected event-driven payment system processing $2B+ annually",
-                "Mentored team of 6 engineers on best practices and system design",
-                "Reduced infrastructure costs by 40% through performance optimization"
-            ],
-            technologies: ["Spring Boot", "Kubernetes", "Kafka", "PostgreSQL"]
-        },
-        {
-            company: "CloudScale Solutions",
-            role: "Backend Developer",
-            duration: "2018 - 2021",
-            achievements: [
-                "Built real-time analytics pipeline processing 1M+ events per minute",
-                "Implemented OAuth2/OIDC authentication serving 10M+ users",
-                "Designed and deployed multi-region disaster recovery solution"
-            ],
-            technologies: ["Java 11", "AWS", "Redis", "Docker"]
-        },
-        {
-            company: "DataFlow Systems",
+            company: "Bank Al Habib",
             role: "Software Engineer",
-            duration: "2016 - 2018",
+            duration: "Oct 2022 - Aug 2025",
+            icon: "assets/icons/bahl.svg",
             achievements: [
-                "Developed RESTful APIs for B2B data integration platform",
-                "Created automated testing framework reducing bug escape rate by 70%",
-                "Optimized database queries resulting in 5x performance improvement"
+                "Designed RESTful microservices in Node.js (TypeScript, Express/NestJS) and Java (Quarkus) for reporting and loan workflows",
+                "Enterprise reporting platform: Reduced generation time ≈40% on 10k+ records and doubled concurrent capacity",
+                "Built bank statement module as standalone service with audit logs, pagination, and PDF/CSV export",
+                "Migrated Excel workflow to ASP.NET Core MVC + SQL Server for loan origination/maintenance"
             ],
-            technologies: ["Java 8", "Spring MVC", "MySQL", "Jenkins"]
+            technologies: ["Node.js", "TypeScript", "Java Quarkus", "ASP.NET Core", "SQL Server"]
+        },
+        {
+            company: "Mindstorm Studios",
+            role: "Game Development Intern",
+            duration: "Jul 2021 - Sep 2021",
+            icon: "assets/icons/mindstorm.svg",
+            achievements: [
+                "Prototyped gameplay mechanics and UI in Unity (C#); implemented event-driven scripts",
+                "Built internal tools and optimized scenes/assets; contributed to debugging and profiling",
+                "Collaborated with designers/artists in agile sprints using Git and JIRA"
+            ],
+            technologies: ["Unity", "C#", "Git", "JIRA"]
+        },
+        {
+            company: "The Citizens Foundation (TCF)",
+            role: "Coordinator (Volunteer)",
+            duration: "Oct 2019 - Mar 2020",
+            icon: "assets/icons/tcf.svg",
+            achievements: [
+                "Supported underprivileged students' transition to intermediate education",
+                "Delivered English/Math support sessions (virtual during COVID)",
+                "Mentored cohorts on study habits and scholarship navigation"
+            ],
+            technologies: ["Education", "Mentoring", "Virtual Teaching"]
         }
     ],
 
@@ -124,39 +136,39 @@ const portfolioData = {
     // Projects
     projects: [
         {
-            title: "Distributed Cache Framework",
-            icon: "🔷",
-            description: "High-performance distributed caching solution with consistent hashing, automatic failover, and sub-millisecond latency. Used in production handling 100K+ QPS.",
-            technologies: ["Java 17", "Netty", "Protocol Buffers", "Raft Consensus"],
-            stars: "2.3k",
-            forks: "340",
+            title: "Full-stack E-commerce",
+            icon: "🛒",
+            description: "Featured/latest feeds, cart, Stripe checkout with responsive UI. SSR/ISR tuning and fault-tolerant API calls.",
+            technologies: ["Next.js", "React", "Stripe", "SSR/ISR"],
+            stars: "-",
+            forks: "-",
             github: "#"
         },
         {
-            title: "API Rate Limiter",
-            icon: "⚡",
-            description: "Distributed rate limiting library supporting sliding window, token bucket, and leaky bucket algorithms. Zero-dependency with Redis backend option.",
-            technologies: ["Java 17", "Redis", "Lua Scripts"],
-            stars: "1.8k",
-            forks: "215",
+            title: "Learning Management System",
+            icon: "📚",
+            description: "Mobile app for 300+ students with authentication, REST API backend, and WhatsApp automation for announcements/results.",
+            technologies: ["Flutter", "Django", "REST API", "WhatsApp API"],
+            stars: "-",
+            forks: "-",
             github: "#"
         },
         {
-            title: "Event Sourcing Framework",
+            title: "Enterprise Reporting Platform",
             icon: "📊",
-            description: "Lightweight event sourcing and CQRS framework for Spring Boot. Features automatic snapshotting, event replay, and projections.",
-            technologies: ["Spring Boot", "Kafka", "PostgreSQL"],
-            stars: "890",
-            forks: "128",
+            description: "Bank reporting system with pagination and API connection pooling. Reduced generation time ≈40% on 10k+ record jobs.",
+            technologies: ["Java Quarkus", "REST", "BIRT", "SQL Server"],
+            stars: "-",
+            forks: "-",
             github: "#"
         },
         {
-            title: "JWT Auth Library",
-            icon: "🔐",
-            description: "Production-ready JWT authentication with refresh token rotation, device fingerprinting, and automatic key rotation for Spring Security.",
-            technologies: ["Spring Security", "JWT", "OAuth2"],
-            stars: "1.2k",
-            forks: "187",
+            title: "Bank Statement Module",
+            icon: "🏦",
+            description: "Standalone service with audit-ready logs, pagination, scheduled jobs, and export (PDF/CSV). Swagger docs and role-based access.",
+            technologies: ["Node.js", "TypeScript", "Express", "Swagger"],
+            stars: "-",
+            forks: "-",
             github: "#"
         }
     ],
@@ -164,47 +176,47 @@ const portfolioData = {
     // Skills organized by category
     skills: [
         {
-            category: "Languages & Frameworks",
-            icon: "☕",
+            category: "Backend",
+            icon: "⚙️",
             items: [
-                { name: "Java 17+", level: 95 },
-                { name: "Spring Boot", level: 95 },
-                { name: "Spring Cloud", level: 90 },
-                { name: "Kotlin", level: 75 },
-                { name: "Go", level: 60 }
+                { name: "Node.js/Express", level: 90 },
+                { name: "TypeScript", level: 90 },
+                { name: "Java (Quarkus)", level: 80 },
+                { name: "ASP.NET Core (C#)", level: 80 },
+                { name: "Python", level: 65 }
             ]
         },
         {
-            category: "Databases & Storage",
+            category: "Frontend",
+            icon: "🎨",
+            items: [
+                { name: "React/Next.js", level: 85 },
+                { name: "Vue.js", level: 75 },
+                { name: "JavaScript (ES6+)", level: 90 },
+                { name: "HTML5/CSS", level: 85 },
+                { name: "XState/Redux", level: 80 }
+            ]
+        },
+        {
+            category: "Databases",
             icon: "🗄️",
             items: [
-                { name: "PostgreSQL", level: 90 },
-                { name: "Redis", level: 90 },
-                { name: "MongoDB", level: 80 },
-                { name: "Elasticsearch", level: 75 },
-                { name: "Cassandra", level: 65 }
+                { name: "SQL Server", level: 85 },
+                { name: "PostgreSQL", level: 85 },
+                { name: "MySQL/SQLite", level: 80 },
+                { name: "MongoDB", level: 75 },
+                { name: "Firebase", level: 70 }
             ]
         },
         {
-            category: "Cloud & DevOps",
-            icon: "☁️",
+            category: "DevOps & Testing",
+            icon: "🚀",
             items: [
-                { name: "Kubernetes", level: 90 },
-                { name: "Docker", level: 95 },
-                { name: "AWS", level: 85 },
-                { name: "GCP", level: 70 },
-                { name: "Terraform", level: 75 }
-            ]
-        },
-        {
-            category: "Messaging & Tools",
-            icon: "📨",
-            items: [
-                { name: "Apache Kafka", level: 90 },
-                { name: "RabbitMQ", level: 80 },
-                { name: "gRPC", level: 85 },
-                { name: "GraphQL", level: 70 },
-                { name: "CI/CD", level: 90 }
+                { name: "Docker", level: 85 },
+                { name: "GitHub Actions/GitLab CI", level: 85 },
+                { name: "Nginx/Linux", level: 80 },
+                { name: "Jest/Playwright", level: 85 },
+                { name: "Git", level: 90 }
             ]
         }
     ],
@@ -212,20 +224,20 @@ const portfolioData = {
     // Feature cards content
     features: [
         {
-            title: "Architecting at Scale",
-            description: "Designed and built distributed systems handling billions of requests daily with 99.99% uptime.",
+            title: "Fintech Backend Expert",
+            description: "3+ years building high-throughput reporting and loan systems at a major bank with measurable performance wins.",
             link: "#experience",
             linkText: "View my experience →"
         },
         {
-            title: "Spring Boot Mastery",
-            description: "Expert in building production-ready applications with Spring Boot, Spring Cloud, and reactive programming.",
+            title: "Full-Stack Proficiency",
+            description: "Strong with Node.js/TypeScript, ASP.NET Core, React/Next.js, and modern testing practices (Jest/Playwright).",
             link: "#skills",
             linkText: "Explore my skills →"
         },
         {
-            title: "Cloud-Native Expert",
-            description: "Building and deploying containerized applications on Kubernetes with full CI/CD automation.",
+            title: "DevOps & Deployment",
+            description: "Docker, CI/CD pipelines (GitHub Actions, GitLab), and production deployments on Linux/Nginx.",
             link: "#projects",
             linkText: "See my projects →"
         }
@@ -235,31 +247,31 @@ const portfolioData = {
     chatMessages: [
         {
             type: "user",
-            message: "Tell me about Talha Ahmed's experience"
+            message: "Tell me about Talha's experience"
         },
         {
             type: "assistant", 
-            message: `<p><strong>Talha Ahmed</strong> is a Senior Java Backend Engineer with 8+ years of experience building distributed systems at scale.</p>
+            message: `<p><strong>Syed Talha Ahmed Gardazi</strong> is a Full-Stack Software Engineer with 3+ years of fintech experience, now pursuing MSc in Autonomous Systems at ELTE.</p>
                 <p>Key highlights:</p>
                 <ul>
-                    <li>Led backend architecture at <strong>TechCorp</strong> serving 50M+ users</li>
-                    <li>Reduced API latency by 60% through microservices optimization</li>
-                    <li>Open source contributor to Spring Framework</li>
+                    <li>Built high-throughput reporting systems at <strong>Bank Al Habib</strong></li>
+                    <li>Reduced report generation time by ≈40% and doubled concurrent capacity</li>
+                    <li>Strong with Node.js, TypeScript, React/Next.js, and Docker</li>
                 </ul>`
         }
     ],
 
     // Code snippet for the editor
     codeSnippet: {
-        className: "TalhaAhmed",
-        package: "com.TalhaAhmed.portfolio"
+        className: "TalhaGardazi",
+        package: "com.talhagardazi.portfolio"
     },
 
     // Footer
     footer: {
-        copyright: "© 2025 Talha Ahmed. Built with passion and clean code.",
+        copyright: "© 2025 Syed Talha Ahmed Gardazi. Built with passion and clean code.",
         badges: [
-            { icon: "☕", text: "Java 17" },
+            { icon: "🚀", text: "Node.js/TypeScript" },
             { icon: "🛡️", text: "Production Ready" }
         ]
     }

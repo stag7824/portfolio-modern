@@ -1,25 +1,40 @@
-# 🚀 Developer Portfolio
+# <img src="logo.svg" width="32" height="32" alt="Logo" /> Developer Portfolio
 
 A modern, interactive portfolio website inspired by Cursor's sleek UI/UX design. Built with vanilla HTML, CSS, and JavaScript - no frameworks required!
 
 ![Portfolio Preview](https://img.shields.io/badge/Status-Live-brightgreen) ![License](https://img.shields.io/badge/License-MIT-blue) ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker)
 
+## 📸 Screenshots
+
+> **Portfolio screenshots:**
+> 
+
+![Hero Section](screenshots/hero.png)
+![VS Code Editor](screenshots/editor.png)
+![Projects](screenshots/projects.png)
+![Mobile View](screenshots/mobile.png)
+
+
 ## ✨ Features
 
-- **🎨 Modern Design** - Dark theme with smooth animations and glassmorphism effects
-- **💻 Interactive VS Code Editor** - Simulated code editor with syntax highlighting and file explorer
-- **🤖 AI Chat Panel** - Cursor-style AI assistant demo panel
-- **📱 Fully Responsive** - Works beautifully on desktop, tablet, and mobile
-- **⚡ Dynamic Content** - All content driven by a single `data.js` file
-- **🌟 Neon Effects** - Stunning lighting effects on the logo and branding
-- **🐳 Docker Ready** - Containerized for easy deployment
+| Feature | Description |
+|---------|-------------|
+| 🎨 **Modern Design** | Dark theme with smooth animations and glassmorphism effects |
+| 💻 **Interactive VS Code Editor** | Simulated code editor with syntax highlighting and file explorer |
+| 🤖 **AI Chat Panel** | Cursor-style AI assistant demo panel |
+| 📱 **Fully Responsive** | Works beautifully on desktop, tablet, and mobile |
+| ⚡ **Dynamic Content** | All content driven by a single `data.js` file |
+| 🌟 **Neon Effects** | Stunning lighting effects on the logo and branding |
+| 🐳 **Docker Ready** | Containerized for easy deployment |
 
 ## 🛠️ Tech Stack
 
-- HTML5
-- CSS3 (Custom Properties, Flexbox, Grid, Animations)
-- Vanilla JavaScript (ES6+)
-- Nginx (for Docker deployment)
+| Category | Technologies |
+|----------|-------------|
+| **Markup** | HTML5 |
+| **Styling** | CSS3 (Custom Properties, Flexbox, Grid, Animations) |
+| **Scripting** | Vanilla JavaScript (ES6+) |
+| **Deployment** | Nginx (Docker) |
 
 ## 🚀 Quick Start
 
@@ -84,27 +99,35 @@ const portfolioData = {
 
 ```
 portfolio/
-├── index.html      # Main HTML structure
-├── styles.css      # All styles and animations
-├── script.js       # Interactive features and dynamic content
-├── data.js         # All portfolio content (edit this!)
-├── Dockerfile      # Docker configuration
-├── .gitignore      # Git ignore rules
-├── LICENSE         # MIT License
-├── README.md       # This file
-└── CONTRIBUTING.md # Contribution guidelines
+│
+├── 📄 index.html          # Main HTML structure
+├── 🎨 styles.css          # All styles and animations
+├── ⚙️ script.js           # Interactive features and dynamic content
+├── 📊 data.js             # All portfolio content (edit this!)
+├── 🖼️ logo.svg            # Portfolio logo
+│
+├── 🐳 Dockerfile          # Docker configuration
+├── 📋 .gitignore          # Git ignore rules
+│
+├── 📖 README.md           # This file
+├── 📝 CHANGELOG.md        # Version history
+├── 🤝 CONTRIBUTING.md     # Contribution guidelines
+├── 🔒 SECURITY.md         # Security policy
+└── 📜 LICENSE             # MIT License
 ```
 
 ## 🎯 Sections
 
-1. **Hero** - Eye-catching intro with VS Code editor demo
-2. **Trusted By** - Company logos section
-3. **Features** - Key highlights with interactive demos
-4. **Experience** - Timeline of work history
-5. **Testimonials** - Colleague recommendations
-6. **Projects** - Featured open source work
-7. **Skills** - Technical skills with progress bars
-8. **Contact** - Get in touch section
+| # | Section | Description |
+|---|---------|-------------|
+| 1 | **Hero** | Eye-catching intro with VS Code editor demo |
+| 2 | **Trusted By** | Company logos section |
+| 3 | **Features** | Key highlights with interactive demos |
+| 4 | **Experience** | Timeline of work history |
+| 5 | **Testimonials** | Colleague recommendations |
+| 6 | **Projects** | Featured open source work |
+| 7 | **Skills** | Technical skills with progress bars |
+| 8 | **Contact** | Get in touch section |
 
 ## 🤝 Contributing
 
