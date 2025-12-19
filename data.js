@@ -28,8 +28,8 @@ const portfolioData = {
         linkedinHandle: "/in/stagify",
         portfolio: "https://portfolio.bugbrew.tech",
         portfolioHandle: "portfolio.bugbrew.tech",
-        twitter: "",
-        twitterHandle: ""
+        twitter: "stagifyy",
+        twitterHandle: "@stagifyy"
     },
 
     // Navigation Items
