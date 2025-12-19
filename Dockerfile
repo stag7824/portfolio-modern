@@ -6,6 +6,7 @@ COPY index.html /usr/share/nginx/html/
 COPY styles.css /usr/share/nginx/html/
 COPY script.js /usr/share/nginx/html/
 COPY data.js /usr/share/nginx/html/
+COPY assets/ /usr/share/nginx/html/assets/
 
 # Create custom nginx config to serve on port 3000
 RUN echo 'server { \
