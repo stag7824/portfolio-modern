@@ -1,5 +1,5 @@
 /* ============================================
-   ALEX CHEN PORTFOLIO - CURSOR-INSPIRED DESIGN
+   Talha Ahmed PORTFOLIO - CURSOR-INSPIRED DESIGN
    ============================================ */
 
 /* CSS Variables */
@@ -319,6 +319,16 @@ body {
 }
 
 /* VS Code Editor Container */
+
+.editor-notice {
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+    font-style: italic;
+    text-decoration: underline;
+}
+
 .vscode-container {
     width: 100%;
     max-width: 1200px;
@@ -550,6 +560,17 @@ body {
     display: flex;
     background: #252526;
     border-bottom: 1px solid var(--vscode-border);
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.editor-tabs::-webkit-scrollbar {
+    height: 3px;
+}
+
+.editor-tabs::-webkit-scrollbar-thumb {
+    background: var(--vscode-border);
+    border-radius: 3px;
 }
 
 .tab {
@@ -562,6 +583,8 @@ body {
     cursor: pointer;
     border-right: 1px solid var(--vscode-border);
     transition: all var(--transition-fast);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .tab:hover {
@@ -577,6 +600,17 @@ body {
 
 .tab-icon {
     font-size: 0.9rem;
+}
+
+.tab-icon.json-icon {
+    color: #e6c07b;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.tab-icon.md-icon {
+    font-size: 0.85rem;
 }
 
 .tab-close {

@@ -1,9 +1,12 @@
 /**
- * Alex Chen Portfolio - Interactive Features
+ * Portfolio - Interactive Features
  * Inspired by Cursor's modern UI/UX
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize dynamic content from data.js FIRST
+    initDynamicFileNames();
+    
     // Initialize all features
     initSmoothScroll();
     initHeaderScroll();
@@ -18,6 +21,108 @@ document.addEventListener('DOMContentLoaded', () => {
     initSkillBars();
     initParallax();
 });
+
+/**
+ * Initialize dynamic file names from portfolioData
+ */
+function initDynamicFileNames() {
+    const data = typeof portfolioData !== 'undefined' ? portfolioData : null;
+    if (!data) return;
+    
+    const firstName = data.personal?.firstName || 'Talha';
+    const lastName = data.personal?.lastName || 'Ahmed';
+    const name = data.personal?.name || 'Talha Ahmed';
+    const role = data.personal?.role || 'Senior Java Backend Engineer';
+    const className = firstName + lastName;
+    const mainFileName = `${className}.java`;
+    
+    // Update window title
+    document.title = `${name} | ${role}`;
+    
+    // Update file explorer main Java file
+    const mainFileEl = document.querySelector('.file.active');
+    if (mainFileEl) {
+        const fileText = mainFileEl.childNodes[mainFileEl.childNodes.length - 1];
+        if (fileText && fileText.nodeType === Node.TEXT_NODE) {
+            fileText.textContent = `\n                                                    ${mainFileName}`;
+        }
+    }
+    
+    // Update active tab
+    const activeTab = document.querySelector('.tab.active');
+    if (activeTab) {
+        activeTab.setAttribute('data-file', mainFileName);
+        const tabName = activeTab.querySelector('.tab-name');
+        if (tabName) {
+            tabName.textContent = mainFileName;
+        }
+    }
+    
+    // Update breadcrumb
+    const breadcrumbCurrent = document.querySelector('.breadcrumb .current');
+    if (breadcrumbCurrent) {
+        breadcrumbCurrent.textContent = mainFileName;
+    }
+    
+    // Update titlebar
+    const titlebar = document.querySelector('.titlebar-text');
+    if (titlebar) {
+        titlebar.textContent = `${mainFileName} — portfolio`;
+    }
+    
+    // Update logo text
+    const logoText = document.querySelector('.logo-text');
+    if (logoText) {
+        logoText.textContent = `${firstName.toLowerCase()}.${lastName.toLowerCase()}`;
+    }
+    
+    // Update hero content
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle && data.personal) {
+        heroTitle.innerHTML = `
+            ${data.personal.tagline}, 
+            <span class="gradient-text">${name} is a ${role}</span> 
+            ${data.personal.description}.
+        `;
+    }
+    
+    // Update hero subtitle
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    if (heroSubtitle && data.personal?.subtitle) {
+        heroSubtitle.textContent = data.personal.subtitle;
+    }
+    
+    // Update mobile hero card
+    const mobileCardName = document.querySelector('.mobile-card-info h3');
+    if (mobileCardName) {
+        mobileCardName.textContent = name;
+    }
+    const mobileCardRole = document.querySelector('.mobile-card-info span');
+    if (mobileCardRole) {
+        mobileCardRole.textContent = role;
+    }
+    
+    // Update AI chat messages
+    const chatMessages = document.querySelector('.chat-messages');
+    if (chatMessages && data.chatMessages) {
+        const userMsg = chatMessages.querySelector('.chat-message.user .message-content');
+        const assistantMsg = chatMessages.querySelector('.chat-message.assistant .message-content');
+        if (userMsg) {
+            userMsg.textContent = `Tell me about ${name}'s experience`;
+        }
+        if (assistantMsg) {
+            assistantMsg.innerHTML = `
+                <p><strong>${name}</strong> is a ${role} with ${data.personal.yearsExperience} years of experience building distributed systems at scale.</p>
+                <p>Key highlights:</p>
+                <ul>
+                    <li>Led backend architecture at <strong>TechCorp</strong> serving 50M+ users</li>
+                    <li>Reduced API latency by 60% through microservices optimization</li>
+                    <li>Open source contributor to Spring Framework</li>
+                </ul>
+            `;
+        }
+    }
+}
 
 /**
  * Smooth scrolling for anchor links
@@ -87,21 +192,47 @@ function initMobileMenu() {
  */
 function initTypingAnimation() {
     const codeContent = document.querySelector('.code-content');
+    const lineNumbers = document.querySelector('.line-numbers');
     if (!codeContent) return;
 
-    // Store original content
-    const originalHTML = codeContent.innerHTML;
+    // Get dynamic data
+    const data = typeof portfolioData !== 'undefined' ? portfolioData : null;
+    const firstName = data?.personal?.firstName || 'Talha';
+    const lastName = data?.personal?.lastName || 'Ahmed';
+    const mainFileName = `${firstName}${lastName}.java`;
+    
+    // Get dynamic content
+    const fileContents = getFileContent(mainFileName);
+    if (fileContents) {
+        codeContent.innerHTML = `<code>${fileContents.code}</code>`;
+        
+        // Update line numbers
+        if (lineNumbers) {
+            lineNumbers.innerHTML = '';
+            for (let i = 1; i <= fileContents.lines; i++) {
+                const span = document.createElement('span');
+                span.textContent = i;
+                lineNumbers.appendChild(span);
+            }
+        }
+    }
+    
+    // Store content for animation
+    const codeElement = codeContent.querySelector('code');
+    if (!codeElement) return;
+    
+    const originalHTML = codeElement.innerHTML;
     const lines = originalHTML.split('\n');
     
     // Clear content for animation
-    codeContent.innerHTML = '';
+    codeElement.innerHTML = '';
     
     let currentLine = 0;
     const typeSpeed = 5;
     
     function typeNextLine() {
         if (currentLine < lines.length) {
-            codeContent.innerHTML += lines[currentLine] + '\n';
+            codeElement.innerHTML += lines[currentLine] + '\n';
             currentLine++;
             
             // Random delay between lines for natural effect
@@ -111,7 +242,7 @@ function initTypingAnimation() {
     }
     
     // Start typing after a short delay
-    setTimeout(typeNextLine, 1000);
+    setTimeout(typeNextLine, 500);
 }
 
 /**
@@ -270,176 +401,292 @@ function switchToFile(fileName) {
 }
 
 /**
- * Get file content for different files
+ * Get file content for different files - DYNAMIC from portfolioData
  */
 function getFileContent(fileName) {
+    // Get dynamic data from portfolioData
+    const data = typeof portfolioData !== 'undefined' ? portfolioData : null;
+    const name = data?.personal?.name || 'Talha Ahmed';
+    const firstName = data?.personal?.firstName || 'Talha';
+    const lastName = data?.personal?.lastName || 'Ahmed';
+    const className = firstName + lastName;
+    const role = data?.personal?.role || 'Senior Java Backend Engineer';
+    const location = data?.personal?.location || 'San Francisco, CA';
+    const yearsExp = data?.personal?.yearsExperience?.replace('+', '') || '8';
+    const expertise = data?.expertise || ['Microservices', 'Distributed Systems', 'Spring Boot', 'Kubernetes', 'Event-Driven Architecture'];
+    const packageName = `com.${firstName.toLowerCase()}${lastName.toLowerCase()}.portfolio`;
+    
+    // Build expertise list HTML
+    const expertiseItems = expertise.map(e => `<span class="string">"${e}"</span>`).join(',\n        ');
+    
+    // Dynamic main profile file
+    const mainFileName = `${className}.java`;
+    
     const contents = {
-        'AlexChen.java': {
-            lines: 34,
-            code: `<span class="keyword">package</span> <span class="namespace">com.alexchen.portfolio</span>;
+        [mainFileName]: {
+            lines: 52,
+            code: `<span class="keyword">package</span> <span class="namespace">${packageName}</span>;
 
+<span class="keyword">import</span> <span class="namespace">java.util.concurrent.CompletableFuture</span>;
 <span class="keyword">import</span> <span class="namespace">java.util.List</span>;
-<span class="keyword">import</span> <span class="namespace">java.util.Map</span>;
+<span class="keyword">import</span> <span class="namespace">lombok.Builder</span>;
 
 <span class="comment">/**
- * Senior Backend Engineer Profile
- * @author Alex Chen
- * @version 2.0.0
+ * ═══════════════════════════════════════════════════════════
+ *  ${role}
+ *  Building distributed systems that scale to millions
+ * ═══════════════════════════════════════════════════════════
+ * @author  ${name}
+ * @version 3.0.0-RELEASE
+ * @since   2016
  */</span>
-<span class="annotation">@Profile</span>(<span class="string">"production"</span>)
-<span class="keyword">public class</span> <span class="class-name">AlexChen</span> <span class="keyword">implements</span> <span class="interface">Engineer</span>, <span class="interface">Architect</span> {
+<span class="annotation">@Service</span>
+<span class="annotation">@Slf4j</span>
+<span class="keyword">public class</span> <span class="class-name">${className}</span> <span class="keyword">implements</span> <span class="interface">Engineer</span>, <span class="interface">Architect</span>, <span class="interface">Mentor</span> {
 
-    <span class="keyword">private static final</span> <span class="type">String</span> NAME = <span class="string">"Alex Chen"</span>;
-    <span class="keyword">private static final</span> <span class="type">String</span> ROLE = <span class="string">"Senior Java Backend Engineer"</span>;
-    <span class="keyword">private static final</span> <span class="type">int</span> YEARS_EXP = <span class="number">8</span>;
-    <span class="keyword">private static final</span> <span class="type">String</span> LOCATION = <span class="string">"San Francisco, CA"</span>;
+    <span class="comment">// ═══════════ PROFILE CONSTANTS ═══════════</span>
+    <span class="keyword">public static final</span> <span class="type">String</span>  NAME     = <span class="string">"${name}"</span>;
+    <span class="keyword">public static final</span> <span class="type">String</span>  ROLE     = <span class="string">"${role}"</span>;
+    <span class="keyword">public static final</span> <span class="type">int</span>     YOE      = <span class="number">${yearsExp}</span>;
+    <span class="keyword">public static final</span> <span class="type">String</span>  LOCATION = <span class="string">"${location}"</span>;
     
-    <span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">String</span>&gt; expertise = List.of(
-        <span class="string">"Microservices"</span>, <span class="string">"Distributed Systems"</span>,
-        <span class="string">"Spring Boot"</span>, <span class="string">"Kubernetes"</span>,
-        <span class="string">"Event-Driven Architecture"</span>
+    <span class="comment">// ═══════════ CORE EXPERTISE ═══════════</span>
+    <span class="keyword">private final</span> <span class="type">List</span>&lt;<span class="type">String</span>&gt; expertise = List.of(
+        ${expertiseItems}
     );
     
     <span class="annotation">@Override</span>
-    <span class="keyword">public</span> <span class="type">Solution</span> <span class="method">architect</span>(<span class="type">Problem</span> challenge) {
-        <span class="keyword">return</span> Solution.builder()
-            .scalable(<span class="keyword">true</span>)
-            .maintainable(<span class="keyword">true</span>)
-            .performant(<span class="keyword">true</span>)
-            .build();
+    <span class="keyword">public</span> <span class="type">CompletableFuture</span>&lt;<span class="type">Solution</span>&gt; <span class="method">architect</span>(<span class="type">Challenge</span> problem) {
+        <span class="keyword">return</span> CompletableFuture.supplyAsync(() -> 
+            Solution.builder()
+                .scalability(<span class="type">Scalability</span>.HORIZONTAL)
+                .availability(<span class="number">99.99</span>)
+                .latencyP99(<span class="type">Duration</span>.ofMillis(<span class="number">15</span>))
+                .throughput(<span class="string">"500K RPS"</span>)
+                .build()
+        );
+    }
+    
+    <span class="annotation">@Scheduled</span>(cron = <span class="string">"0 0 * * * *"</span>)
+    <span class="keyword">public void</span> <span class="method">continuousLearning</span>() {
+        log.info(<span class="string">"☕ Exploring new technologies..."</span>);
     }
 }`
         },
         'Experience.java': {
-            lines: 45,
-            code: `<span class="keyword">package</span> <span class="namespace">com.alexchen.portfolio</span>;
+            lines: 62,
+            code: `<span class="keyword">package</span> <span class="namespace">${packageName}</span>;
 
-<span class="keyword">import</span> <span class="namespace">java.time.LocalDate</span>;
-<span class="keyword">import</span> <span class="namespace">java.util.List</span>;
+<span class="keyword">import</span> <span class="namespace">java.time.*</span>;
+<span class="keyword">import</span> <span class="namespace">java.util.stream.*</span>;
 
 <span class="comment">/**
- * Professional Experience
- * @author Alex Chen
+ * ┌─────────────────────────────────────────────────┐
+ *   Professional Journey & Career Milestones
+ * └─────────────────────────────────────────────────┘
+ * @author ${name}
  */</span>
+<span class="annotation">@Repository</span>
 <span class="keyword">public class</span> <span class="class-name">Experience</span> {
 
-    <span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">Position</span>&gt; positions = List.of(
-        <span class="keyword">new</span> Position(
-            <span class="string">"TechCorp Inc."</span>,
-            <span class="string">"Senior Backend Engineer"</span>,
-            LocalDate.of(<span class="number">2021</span>, <span class="number">1</span>, <span class="number">1</span>),
-            LocalDate.now(),
-            List.of(
-                <span class="string">"Led microservices migration"</span>,
-                <span class="string">"Architected payment system ($2B+)"</span>,
-                <span class="string">"Mentored 6 engineers"</span>
-            )
-        ),
-        <span class="keyword">new</span> Position(
-            <span class="string">"CloudScale Solutions"</span>,
-            <span class="string">"Backend Developer"</span>,
-            LocalDate.of(<span class="number">2018</span>, <span class="number">3</span>, <span class="number">1</span>),
-            LocalDate.of(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">31</span>),
-            List.of(
-                <span class="string">"Built analytics pipeline (1M+ events/min)"</span>,
-                <span class="string">"Implemented OAuth2/OIDC (10M+ users)"</span>
-            )
-        ),
-        <span class="keyword">new</span> Position(
-            <span class="string">"DataFlow Systems"</span>,
-            <span class="string">"Software Engineer"</span>,
-            LocalDate.of(<span class="number">2016</span>, <span class="number">6</span>, <span class="number">1</span>),
-            LocalDate.of(<span class="number">2018</span>, <span class="number">2</span>, <span class="number">28</span>),
-            List.of(
-                <span class="string">"Developed RESTful APIs"</span>,
-                <span class="string">"Created testing framework"</span>
-            )
-        )
+    <span class="keyword">private final</span> <span class="type">List</span>&lt;<span class="type">Role</span>&gt; journey = List.of(
+        
+        <span class="comment">// ══════════ CURRENT ROLE ══════════</span>
+        Role.builder()
+            .company(<span class="string">"TechCorp Inc."</span>)
+            .title(<span class="string">"Senior Backend Engineer"</span>)
+            .period(<span class="string">"2021 → Present"</span>)
+            .impact(List.of(
+                <span class="string">"🚀 Led monolith → microservices (80% faster deploys)"</span>,
+                <span class="string">"💰 Architected $2B+ payment processing system"</span>,
+                <span class="string">"👥 Mentored 6 engineers to senior level"</span>,
+                <span class="string">"📉 Cut infrastructure costs by 40%"</span>
+            ))
+            .build(),
+        
+        <span class="comment">// ══════════ PREVIOUS ROLES ══════════</span>
+        Role.builder()
+            .company(<span class="string">"CloudScale Solutions"</span>)
+            .title(<span class="string">"Backend Developer"</span>)
+            .period(<span class="string">"2018 → 2021"</span>)
+            .impact(List.of(
+                <span class="string">"📊 Real-time analytics: 1M+ events/min"</span>,
+                <span class="string">"🔐 OAuth2/OIDC for 10M+ users"</span>,
+                <span class="string">"🌍 Multi-region DR architecture"</span>
+            ))
+            .build(),
+            
+        Role.builder()
+            .company(<span class="string">"DataFlow Systems"</span>)
+            .title(<span class="string">"Software Engineer"</span>)
+            .period(<span class="string">"2016 → 2018"</span>)
+            .impact(List.of(
+                <span class="string">"🔗 RESTful APIs for B2B platform"</span>,
+                <span class="string">"🧪 Testing framework (70% fewer bugs)"</span>,
+                <span class="string">"⚡ 5x database query optimization"</span>
+            ))
+            .build()
     );
-
-    <span class="keyword">public</span> <span class="type">int</span> <span class="method">getTotalYears</span>() {
-        <span class="keyword">return</span> <span class="number">8</span>;
+    
+    <span class="keyword">public</span> <span class="type">Duration</span> <span class="method">getTotTalhaperience</span>() {
+        <span class="keyword">return</span> <span class="type">Duration</span>.between(
+            LocalDate.of(<span class="number">2016</span>, <span class="number">6</span>, <span class="number">1</span>),
+            LocalDate.now()
+        );
     }
 }`
         },
         'Projects.java': {
-            lines: 38,
-            code: `<span class="keyword">package</span> <span class="namespace">com.alexchen.portfolio</span>;
+            lines: 58,
+            code: `<span class="keyword">package</span> <span class="namespace">${packageName}</span>;
 
-<span class="keyword">import</span> <span class="namespace">java.util.List</span>;
+<span class="keyword">import</span> <span class="namespace">java.util.stream.*</span>;
+<span class="keyword">import</span> <span class="namespace">lombok.*</span>;
 
 <span class="comment">/**
- * Open Source Projects
- * @author Alex Chen
+ * ╔═══════════════════════════════════════════════════════════╗
+ *   Open Source Contributions & Featured Projects
+ * ╚═══════════════════════════════════════════════════════════╝
+ * @author ${name}
  */</span>
+<span class="annotation">@Component</span>
 <span class="keyword">public class</span> <span class="class-name">Projects</span> {
 
-    <span class="keyword">public static final</span> <span class="type">List</span>&lt;<span class="type">Project</span>&gt; FEATURED = List.of(
+    <span class="keyword">public static final</span> <span class="type">List</span>&lt;<span class="type">Project</span>&gt; OPEN_SOURCE = List.of(
+    
+        <span class="comment">// ★★★ Most Popular ★★★</span>
         Project.builder()
             .name(<span class="string">"Distributed Cache Framework"</span>)
-            .stars(<span class="number">2300</span>)
-            .technologies(<span class="string">"Java 17"</span>, <span class="string">"Netty"</span>, <span class="string">"Raft"</span>)
-            .description(<span class="string">"High-performance caching"</span>)
+            .description(<span class="string">"Sub-ms latency, 100K+ QPS"</span>)
+            .tech(<span class="string">"Java 17"</span>, <span class="string">"Netty"</span>, <span class="string">"Raft"</span>)
+            .stars(<span class="number">2300</span>).forks(<span class="number">340</span>)
             .build(),
-        
+            
         Project.builder()
             .name(<span class="string">"API Rate Limiter"</span>)
-            .stars(<span class="number">1800</span>)
-            .technologies(<span class="string">"Java 17"</span>, <span class="string">"Redis"</span>)
-            .description(<span class="string">"Distributed rate limiting"</span>)
+            .description(<span class="string">"Token bucket + sliding window"</span>)
+            .tech(<span class="string">"Java 17"</span>, <span class="string">"Redis"</span>, <span class="string">"Lua"</span>)
+            .stars(<span class="number">1800</span>).forks(<span class="number">215</span>)
             .build(),
-        
+            
         Project.builder()
             .name(<span class="string">"Event Sourcing Framework"</span>)
-            .stars(<span class="number">890</span>)
-            .technologies(<span class="string">"Spring Boot"</span>, <span class="string">"Kafka"</span>)
-            .description(<span class="string">"CQRS and event sourcing"</span>)
+            .description(<span class="string">"CQRS + automatic snapshots"</span>)
+            .tech(<span class="string">"Spring Boot"</span>, <span class="string">"Kafka"</span>)
+            .stars(<span class="number">890</span>).forks(<span class="number">128</span>)
             .build(),
-        
+            
         Project.builder()
             .name(<span class="string">"JWT Auth Library"</span>)
-            .stars(<span class="number">1200</span>)
-            .technologies(<span class="string">"Spring Security"</span>, <span class="string">"JWT"</span>)
-            .description(<span class="string">"Production-ready auth"</span>)
+            .description(<span class="string">"Refresh rotation + fingerprinting"</span>)
+            .tech(<span class="string">"Spring Security"</span>, <span class="string">"JWT"</span>)
+            .stars(<span class="number">1200</span>).forks(<span class="number">187</span>)
             .build()
     );
+    
+    <span class="keyword">public</span> <span class="type">long</span> <span class="method">getTotalStars</span>() {
+        <span class="keyword">return</span> OPEN_SOURCE.stream()
+            .mapToLong(Project::getStars)
+            .sum(); <span class="comment">// → 6,190 ⭐</span>
+    }
 }`
         },
         'Skills.json': {
-            lines: 28,
+            lines: 42,
             code: `{
+  <span class="string">"profile"</span>: {
+    <span class="string">"name"</span>:     <span class="string">"${name}"</span>,
+    <span class="string">"title"</span>:    <span class="string">"${role}"</span>,
+    <span class="string">"yoe"</span>:      <span class="number">${yearsExp}</span>
+  },
+  
   <span class="string">"languages"</span>: {
-    <span class="string">"Java 17+"</span>: <span class="number">95</span>,
-    <span class="string">"Kotlin"</span>: <span class="number">75</span>,
-    <span class="string">"Go"</span>: <span class="number">60</span>
+    <span class="string">"Java 17+"</span>:     <span class="number">95</span>,
+    <span class="string">"Kotlin"</span>:       <span class="number">75</span>,
+    <span class="string">"Go"</span>:           <span class="number">60</span>,
+    <span class="string">"TypeScript"</span>:   <span class="number">70</span>
   },
+  
   <span class="string">"frameworks"</span>: {
-    <span class="string">"Spring Boot"</span>: <span class="number">95</span>,
-    <span class="string">"Spring Cloud"</span>: <span class="number">90</span>
+    <span class="string">"Spring Boot"</span>:  <span class="number">95</span>,
+    <span class="string">"Spring Cloud"</span>: <span class="number">90</span>,
+    <span class="string">"Micronaut"</span>:    <span class="number">70</span>
   },
+  
   <span class="string">"databases"</span>: {
-    <span class="string">"PostgreSQL"</span>: <span class="number">90</span>,
-    <span class="string">"Redis"</span>: <span class="number">90</span>,
-    <span class="string">"MongoDB"</span>: <span class="number">80</span>,
-    <span class="string">"Elasticsearch"</span>: <span class="number">75</span>
+    <span class="string">"PostgreSQL"</span>:   <span class="number">90</span>,
+    <span class="string">"Redis"</span>:        <span class="number">90</span>,
+    <span class="string">"MongoDB"</span>:      <span class="number">80</span>,
+    <span class="string">"Elasticsearch"</span>:<span class="number">75</span>,
+    <span class="string">"Cassandra"</span>:    <span class="number">65</span>
   },
+  
   <span class="string">"cloud"</span>: {
-    <span class="string">"Kubernetes"</span>: <span class="number">90</span>,
-    <span class="string">"Docker"</span>: <span class="number">95</span>,
-    <span class="string">"AWS"</span>: <span class="number">85</span>,
-    <span class="string">"GCP"</span>: <span class="number">70</span>
+    <span class="string">"Kubernetes"</span>:   <span class="number">90</span>,
+    <span class="string">"Docker"</span>:       <span class="number">95</span>,
+    <span class="string">"AWS"</span>:          <span class="number">85</span>,
+    <span class="string">"GCP"</span>:          <span class="number">70</span>,
+    <span class="string">"Terraform"</span>:    <span class="number">75</span>
   },
+  
   <span class="string">"messaging"</span>: {
-    <span class="string">"Apache Kafka"</span>: <span class="number">90</span>,
-    <span class="string">"RabbitMQ"</span>: <span class="number">80</span>,
-    <span class="string">"gRPC"</span>: <span class="number">85</span>
+    <span class="string">"Kafka"</span>:        <span class="number">90</span>,
+    <span class="string">"RabbitMQ"</span>:     <span class="number">80</span>,
+    <span class="string">"gRPC"</span>:         <span class="number">85</span>
   }
 }`
+        },
+        'README.md': {
+            lines: 45,
+            code: `<span class="comment"># 👋 Hi, I'm ${name}</span>
+
+<span class="string">## ${role}</span>
+
+<span class="keyword">Building scalable backend systems that power</span>
+<span class="keyword">millions of users worldwide.</span>
+
+<span class="comment">───────────────────────────────────────────</span>
+
+<span class="string">### 🚀 What I Do</span>
+
+<span class="keyword">→</span> Design <span class="type">distributed systems</span> at scale
+<span class="keyword">→</span> Build <span class="type">microservices</span> with Spring Boot
+<span class="keyword">→</span> Architect <span class="type">event-driven</span> platforms
+<span class="keyword">→</span> Optimize for <span class="type">high availability</span>
+
+<span class="string">### 📊 By the Numbers</span>
+
+<span class="number">${yearsExp}+</span>  Years of Experience
+<span class="number">50M+</span> Users Served
+<span class="number">99.99%</span> Uptime Achieved
+<span class="number">$2B+</span> Transactions Processed
+
+<span class="string">### 🛠️ Tech Stack</span>
+
+<span class="type">Languages:</span>  Java, Kotlin, Go
+<span class="type">Framework:</span>  Spring Boot, Spring Cloud
+<span class="type">Databases:</span>  PostgreSQL, Redis, MongoDB
+<span class="type">Cloud:</span>      AWS, Kubernetes, Docker
+<span class="type">Messaging:</span>  Kafka, RabbitMQ, gRPC
+
+<span class="string">### 📫 Let's Connect</span>
+
+<span class="annotation">@${firstName.toLowerCase()}${lastName.toLowerCase()}</span> on GitHub
+<span class="annotation">/in/${firstName.toLowerCase()}${lastName.toLowerCase()}-dev</span> on LinkedIn
+
+<span class="comment">───────────────────────────────────────────</span>
+<span class="comment">☕ Powered by caffeine and clean code</span>`
         }
     };
     
+    // Check if fileName matches the dynamic main file or is TalhaAhmed.java (legacy)
     if (contents[fileName]) {
         return contents[fileName];
+    }
+    
+    // Handle legacy TalhaAhmed.java requests - redirect to dynamic main file
+    if (fileName === 'TalhaAhmed.java' && contents[mainFileName]) {
+        return contents[mainFileName];
     }
     
     // Default content for new files
@@ -501,7 +748,7 @@ function initChatDemo() {
     const responses = [
         {
             keywords: ['experience', 'work', 'job'],
-            response: `Alex has worked at leading tech companies including TechCorp, CloudScale, and DataFlow. 
+            response: `Talha has worked at leading tech companies including TechCorp, CloudScale, and DataFlow. 
                        His expertise spans distributed systems, microservices architecture, and high-performance computing.`
         },
         {
@@ -516,12 +763,12 @@ function initChatDemo() {
         },
         {
             keywords: ['contact', 'hire', 'email'],
-            response: `You can reach Alex at alex@alexchen.dev or connect on LinkedIn (/in/alexchen-dev) 
-                       and GitHub (@alexchen). He's open to senior backend roles and consulting opportunities.`
+            response: `You can reach Talha at Talha@TalhaAhmed.dev or connect on LinkedIn (/in/TalhaAhmed-dev) 
+                       and GitHub (@TalhaAhmed). He's open to senior backend roles and consulting opportunities.`
         },
         {
             keywords: ['education', 'degree'],
-            response: `Alex holds a BS in Computer Science from Stanford University 
+            response: `Talha holds a BS in Computer Science from Stanford University 
                        and is a certified AWS Solutions Architect and Kubernetes Administrator.`
         }
     ];
@@ -535,7 +782,7 @@ function initChatDemo() {
             }
         }
         
-        return `I can tell you about Alex's experience, skills, projects, or contact information. 
+        return `I can tell you about Talha's experience, skills, projects, or contact information. 
                 What would you like to know?`;
     }
 
@@ -935,12 +1182,12 @@ if (document.readyState === 'loading') {
  * Console Easter Egg
  */
 console.log(`
-%c👨‍💻 Alex Chen - Senior Java Backend Engineer
+%c👨‍💻 Talha Ahmed - Senior Java Backend Engineer
 
 %cLooking for the source code? 
 I appreciate your curiosity!
 
-Feel free to reach out: alex@alexchen.dev
+Feel free to reach out: Talha@TalhaAhmed.dev
 
 Built with vanilla HTML, CSS, and JavaScript.
 Inspired by Cursor's beautiful design.
