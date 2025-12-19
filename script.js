@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize dynamic content from data.js FIRST
-    initDynamicFileNames();
+    initDynamicContent();
     
     // Initialize all features
     initSmoothScroll();
@@ -23,9 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Initialize dynamic file names from portfolioData
+ * Initialize ALL dynamic content from portfolioData
  */
-function initDynamicFileNames() {
+function initDynamicContent() {
     const data = typeof portfolioData !== 'undefined' ? portfolioData : null;
     if (!data) return;
     
@@ -35,9 +35,20 @@ function initDynamicFileNames() {
     const role = data.personal?.role || 'Senior Java Backend Engineer';
     const className = firstName + lastName;
     const mainFileName = `${className}.java`;
+    const logoTextValue = `${firstName.toLowerCase()}.${lastName.toLowerCase()}`;
     
     // Update window title
     document.title = `${name} | ${role}`;
+    
+    // Update logo with neon effect data attribute
+    const logoText = document.querySelector('.logo-text');
+    if (logoText) {
+        logoText.textContent = logoTextValue;
+        logoText.setAttribute('data-text', logoTextValue);
+    }
+    
+    // Update navigation links from data
+    initDynamicNavigation(data);
     
     // Update file explorer main Java file
     const mainFileEl = document.querySelector('.file.active');
@@ -70,12 +81,6 @@ function initDynamicFileNames() {
         titlebar.textContent = `${mainFileName} — portfolio`;
     }
     
-    // Update logo text
-    const logoText = document.querySelector('.logo-text');
-    if (logoText) {
-        logoText.textContent = `${firstName.toLowerCase()}.${lastName.toLowerCase()}`;
-    }
-    
     // Update hero content
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle && data.personal) {
@@ -93,33 +98,379 @@ function initDynamicFileNames() {
     }
     
     // Update mobile hero card
+    updateMobileHeroCard(data);
+    
+    // Update AI chat messages
+    updateChatMessages(data);
+    
+    // Update companies section
+    updateCompaniesSection(data);
+    
+    // Update feature cards with metrics
+    updateFeatureCards(data);
+    
+    // Update experience timeline
+    updateExperienceTimeline(data);
+    
+    // Update testimonials
+    updateTestimonials(data);
+    
+    // Update projects
+    updateProjects(data);
+    
+    // Update skills
+    updateSkills(data);
+    
+    // Update contact section
+    updateContactSection(data);
+    
+    // Update footer
+    updateFooter(data);
+}
+
+/**
+ * Initialize navigation dynamically
+ */
+function initDynamicNavigation(data) {
+    if (!data.navigation) return;
+    
+    const navLinks = document.getElementById('navLinks');
+    if (!navLinks) return;
+    
+    navLinks.innerHTML = data.navigation.map(item => {
+        if (item.isCta) {
+            return `<a href="${item.href}" class="nav-cta">${item.label}</a>`;
+        }
+        return `<a href="${item.href}">${item.label}</a>`;
+    }).join('');
+}
+
+/**
+ * Update mobile hero card
+ */
+function updateMobileHeroCard(data) {
     const mobileCardName = document.querySelector('.mobile-card-info h3');
     if (mobileCardName) {
-        mobileCardName.textContent = name;
+        mobileCardName.textContent = data.personal?.name || 'Talha Ahmed';
     }
     const mobileCardRole = document.querySelector('.mobile-card-info span');
     if (mobileCardRole) {
-        mobileCardRole.textContent = role;
+        mobileCardRole.textContent = data.personal?.role || 'Senior Java Backend Engineer';
     }
     
-    // Update AI chat messages
-    const chatMessages = document.querySelector('.chat-messages');
-    if (chatMessages && data.chatMessages) {
-        const userMsg = chatMessages.querySelector('.chat-message.user .message-content');
-        const assistantMsg = chatMessages.querySelector('.chat-message.assistant .message-content');
-        if (userMsg) {
-            userMsg.textContent = `Tell me about ${name}'s experience`;
-        }
-        if (assistantMsg) {
-            assistantMsg.innerHTML = `
-                <p><strong>${name}</strong> is a ${role} with ${data.personal.yearsExperience} years of experience building distributed systems at scale.</p>
-                <p>Key highlights:</p>
-                <ul>
-                    <li>Led backend architecture at <strong>TechCorp</strong> serving 50M+ users</li>
-                    <li>Reduced API latency by 60% through microservices optimization</li>
-                    <li>Open source contributor to Spring Framework</li>
+    // Update mobile stats
+    const mobileStats = document.querySelector('.mobile-stats');
+    if (mobileStats && data.metrics) {
+        const yearsExp = data.personal?.yearsExperience || '8+';
+        mobileStats.innerHTML = `
+            <div class="mobile-stat">
+                <span class="stat-number">${yearsExp}</span>
+                <span class="stat-label">Years Exp</span>
+            </div>
+            <div class="mobile-stat">
+                <span class="stat-number">50M+</span>
+                <span class="stat-label">Users Served</span>
+            </div>
+            <div class="mobile-stat">
+                <span class="stat-number">${data.metrics[2]?.value || '99.99%'}</span>
+                <span class="stat-label">Uptime</span>
+            </div>
+        `;
+    }
+    
+    // Update mobile tags
+    const mobileTags = document.querySelector('.mobile-tags');
+    if (mobileTags && data.expertise) {
+        mobileTags.innerHTML = data.expertise.slice(0, 4).map(skill => 
+            `<span>${skill}</span>`
+        ).join('');
+    }
+}
+
+/**
+ * Update chat messages
+ */
+function updateChatMessages(data) {
+    const name = data.personal?.name || 'Talha Ahmed';
+    const role = data.personal?.role || 'Senior Java Backend Engineer';
+    const yearsExp = data.personal?.yearsExperience || '8+';
+    
+    const userMsg = document.querySelector('.chat-message.user .message-content');
+    const assistantMsg = document.querySelector('.chat-message.assistant .message-content');
+    
+    if (userMsg) {
+        userMsg.textContent = `Tell me about ${name}'s experience`;
+    }
+    if (assistantMsg && data.experience && data.experience[0]) {
+        const exp = data.experience[0];
+        assistantMsg.innerHTML = `
+            <p><strong>${name}</strong> is a ${role} with ${yearsExp} years of experience building distributed systems at scale.</p>
+            <p>Key highlights:</p>
+            <ul>
+                <li>Led backend architecture at <strong>${exp.company}</strong> serving 50M+ users</li>
+                <li>${exp.achievements[0]}</li>
+                <li>Open source contributor to Spring Framework</li>
+            </ul>
+        `;
+    }
+}
+
+/**
+ * Update companies section
+ */
+function updateCompaniesSection(data) {
+    if (!data.companies) return;
+    
+    const companyLogos = document.querySelector('.company-logos');
+    if (!companyLogos) return;
+    
+    companyLogos.innerHTML = data.companies.map(company => `
+        <div class="logo-item">
+            <span class="company-logo">${company.icon} ${company.name}</span>
+        </div>
+    `).join('');
+}
+
+/**
+ * Update feature cards with metrics
+ */
+function updateFeatureCards(data) {
+    if (!data.features || !data.metrics) return;
+    
+    // Update metrics in the terminal demo
+    const metricRows = document.querySelectorAll('.metric-row');
+    if (metricRows.length > 0 && data.metrics) {
+        data.metrics.forEach((metric, index) => {
+            if (metricRows[index]) {
+                const row = metricRows[index];
+                const label = row.querySelector('.metric-label');
+                const fill = row.querySelector('.metric-fill');
+                const value = row.querySelector('.metric-value');
+                
+                if (label) label.textContent = metric.label;
+                if (fill) fill.style.width = `${metric.percentage}%`;
+                if (value) {
+                    value.textContent = metric.value;
+                    if (metric.status === 'good') {
+                        value.classList.add('good');
+                    }
+                }
+            }
+        });
+    }
+}
+
+/**
+ * Update experience timeline
+ */
+function updateExperienceTimeline(data) {
+    if (!data.experience) return;
+    
+    const timeline = document.querySelector('.timeline');
+    if (!timeline) return;
+    
+    timeline.innerHTML = data.experience.map(exp => `
+        <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <div class="company-header">
+                    <h3>${exp.company}</h3>
+                    <span class="role">${exp.role}</span>
+                    <span class="duration">${exp.duration}</span>
+                </div>
+                <ul class="achievements">
+                    ${exp.achievements.map(a => `<li>${a}</li>`).join('')}
                 </ul>
-            `;
+                <div class="tech-tags">
+                    ${exp.technologies.map(t => `<span>${t}</span>`).join('')}
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+/**
+ * Update testimonials
+ */
+function updateTestimonials(data) {
+    if (!data.testimonials) return;
+    
+    const testimonialGrid = document.querySelector('.testimonial-grid');
+    if (!testimonialGrid) return;
+    
+    testimonialGrid.innerHTML = data.testimonials.map(t => `
+        <div class="testimonial-card">
+            <blockquote>"${t.quote}"</blockquote>
+            <div class="testimonial-author">
+                <span class="author-name">${t.author}</span>
+                <span class="author-role">${t.role}</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+/**
+ * Update projects
+ */
+function updateProjects(data) {
+    if (!data.projects) return;
+    
+    const projectsGrid = document.querySelector('.projects-grid');
+    if (!projectsGrid) return;
+    
+    projectsGrid.innerHTML = data.projects.map(p => `
+        <div class="project-card">
+            <div class="project-header">
+                <span class="project-icon">${p.icon}</span>
+                <h3>${p.title}</h3>
+                <div class="project-links">
+                    <a href="${p.github}" class="github-link" title="GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <p class="project-desc">${p.description}</p>
+            <div class="tech-tags">
+                ${p.technologies.map(t => `<span>${t}</span>`).join('')}
+            </div>
+            <div class="project-stats">
+                <span>⭐ ${p.stars}</span>
+                <span>🍴 ${p.forks}</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+/**
+ * Update skills section
+ */
+function updateSkills(data) {
+    if (!data.skills) return;
+    
+    const skillsGrid = document.querySelector('.skills-grid');
+    if (!skillsGrid) return;
+    
+    skillsGrid.innerHTML = data.skills.map(category => `
+        <div class="skill-category">
+            <h3>
+                <span class="category-icon">${category.icon}</span>
+                ${category.category}
+            </h3>
+            <div class="skill-list">
+                ${category.items.map(skill => `
+                    <div class="skill-item">
+                        <span class="skill-name">${skill.name}</span>
+                        <div class="skill-bar"><div class="skill-fill" style="width: ${skill.level}%"></div></div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `).join('');
+}
+
+/**
+ * Update contact section
+ */
+function updateContactSection(data) {
+    const personal = data.personal;
+    const social = data.social;
+    if (!personal || !social) return;
+    
+    // Update contact subtitle
+    const contactSubtitle = document.querySelector('.contact-subtitle');
+    if (contactSubtitle && personal.availabilityNote) {
+        contactSubtitle.textContent = personal.availabilityNote;
+    }
+    
+    // Update contact cards
+    const contactGrid = document.querySelector('.contact-grid');
+    if (contactGrid) {
+        contactGrid.innerHTML = `
+            <div class="contact-card">
+                <div class="contact-icon">📧</div>
+                <h3>Email</h3>
+                <a href="mailto:${personal.email}">${personal.email}</a>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">💼</div>
+                <h3>LinkedIn</h3>
+                <a href="${social.linkedin}">${social.linkedinHandle}</a>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">🐙</div>
+                <h3>GitHub</h3>
+                <a href="${social.github}">${social.githubHandle}</a>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">𝕏</div>
+                <h3>Twitter</h3>
+                <a href="${social.twitter}">${social.twitterHandle}</a>
+            </div>
+        `;
+    }
+    
+    // Update CTA email
+    const ctaLink = document.querySelector('.cta-box a[href^="mailto"]');
+    if (ctaLink && personal.email) {
+        ctaLink.setAttribute('href', `mailto:${personal.email}`);
+    }
+}
+
+/**
+ * Update footer
+ */
+function updateFooter(data) {
+    const personal = data.personal;
+    const social = data.social;
+    const footer = data.footer;
+    if (!personal) return;
+    
+    const firstName = personal.firstName || 'Talha';
+    const lastName = personal.lastName || 'Ahmed';
+    const logoTextValue = `${firstName.toLowerCase()}.${lastName.toLowerCase()}`;
+    
+    // Update footer logo
+    const footerLogo = document.querySelector('.footer-logo .logo-text');
+    if (footerLogo) {
+        footerLogo.textContent = logoTextValue;
+        footerLogo.setAttribute('data-text', logoTextValue);
+    }
+    
+    // Update footer navigation from data
+    if (data.navigation) {
+        const footerNav = document.querySelector('.footer-nav');
+        if (footerNav) {
+            footerNav.innerHTML = data.navigation.map(item => 
+                `<a href="${item.href}">${item.label}</a>`
+            ).join('');
+        }
+    }
+    
+    // Update social links
+    if (social) {
+        const footerGithub = document.getElementById('footerGithub');
+        const footerLinkedin = document.getElementById('footerLinkedin');
+        const footerTwitter = document.getElementById('footerTwitter');
+        
+        if (footerGithub) footerGithub.href = social.github;
+        if (footerLinkedin) footerLinkedin.href = social.linkedin;
+        if (footerTwitter) footerTwitter.href = social.twitter;
+    }
+    
+    // Update copyright and badges
+    if (footer) {
+        const footerBottom = document.querySelector('.footer-bottom p');
+        if (footerBottom) {
+            footerBottom.textContent = footer.copyright;
+        }
+        
+        const footerBadges = document.querySelector('.footer-badges');
+        if (footerBadges && footer.badges) {
+            footerBadges.innerHTML = footer.badges.map(badge => 
+                `<span class="badge">${badge.icon} ${badge.text}</span>`
+            ).join('');
         }
     }
 }
