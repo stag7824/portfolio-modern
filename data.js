@@ -141,6 +141,26 @@ const portfolioData = {
     // Projects
     projects: [
         {
+            title: "3D Portfolio Website (Old Version)",
+            icon: "🌐",
+            description: "Personal portfolio with interactive 3D elements, music, and responsive design. Showcases projects and skills effectively.",
+            technologies: ["Three.js", "JavaScript", "HTML5", "CSS3"],
+            stars: "-",
+            forks: "-",
+            github: "https://github.com/stag7824/3D-portfolio.git"
+        },
+
+        {
+            title: "Modern Portfolio Website (You are here!)",
+            icon: "💼",
+            description: "Sleek, responsive portfolio built with vanilla HTML, CSS, and JavaScript. Features dynamic sections, code editor demo, and AI chat.",
+            technologies: ["HTML5", "CSS3", "JavaScript"],
+            stars: "-",
+            forks: "-",
+            github: "https://github.com/stag7824/portfolio-modern.git"
+        },
+
+        {
             title: "Full-stack E-commerce",
             icon: "🛒",
             description: "Featured/latest feeds, cart, Stripe checkout with responsive UI. SSR/ISR tuning and fault-tolerant API calls.",
@@ -152,7 +172,7 @@ const portfolioData = {
         {
             title: "Learning Management System",
             icon: "📚",
-            description: "Mobile app for 300+ students with authentication, REST API backend, and WhatsApp automation for announcements/results.",
+            description: "Mobile app for 300+ students with authentication, REST API backend, and WhatsApp automation for announcements/results. (No github due to private repo)",
             technologies: ["Flutter", "Django", "REST API", "WhatsApp API"],
             stars: "-",
             forks: "-",
@@ -161,7 +181,7 @@ const portfolioData = {
         {
             title: "Enterprise Reporting Platform",
             icon: "📊",
-            description: "Bank reporting system with pagination and API connection pooling. Reduced generation time ≈40% on 10k+ record jobs.",
+            description: "Bank reporting system with pagination and API connection pooling. Reduced generation time ≈40% on 10k+ record jobs. (No github due to private repo)",
             technologies: ["Java Quarkus", "REST", "BIRT", "SQL Server"],
             stars: "-",
             forks: "-",
@@ -170,7 +190,7 @@ const portfolioData = {
         {
             title: "Bank Statement Module",
             icon: "🏦",
-            description: "Standalone service with audit-ready logs, pagination, scheduled jobs, and export (PDF/CSV). Swagger docs and role-based access.",
+            description: "Standalone service with audit-ready logs, pagination, scheduled jobs, and export (PDF/CSV). Swagger docs and role-based access. (No github due to private repo)",
             technologies: ["Node.js", "TypeScript", "Express", "Swagger"],
             stars: "-",
             forks: "-",
