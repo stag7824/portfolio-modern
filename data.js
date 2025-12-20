@@ -118,18 +118,23 @@ const portfolioData = {
     testimonials: [
         {
             quote: "Talha is one of the most talented backend engineers I've worked with. His ability to design scalable systems while keeping code maintainable is exceptional.",
-            author: "Sarah Johnson",
-            role: "VP of Engineering, TechCorp"
+            author: "Wali Khan",
+            role: "IT Officer, Bank Al Habib"
         },
         {
-            quote: "Working with Talha on our payment infrastructure was a game-changer. He brought deep expertise and always pushed for the best technical solutions.",
-            author: "Michael Park",
-            role: "CTO, StartupX"
+            quote: "Talha consistently delivers high-quality code and innovative solutions. His expertise in Node.js and TypeScript significantly improved our backend performance.",
+            author: "Ms. Irma Khatri",
+            role: "Team Lead, Bank Al Habib"
         },
         {
-            quote: "Talha's mentorship helped me grow from junior to senior developer in just 2 years. He explains complex concepts with remarkable clarity.",
-            author: "Emily Rodriguez",
-            role: "Senior Engineer, TechCorp"
+            quote: "Talha's ability to quickly grasp complex requirements and translate them into efficient code is impressive. He is a great team player and a proactive problem solver.",
+            author: "Ahmed Raza",
+            role: "Senior Engineer, Mindstorm Studios"
+        },
+        {
+            quote: "Talha's abiliy to above and beyond in every task he undertakes is truly commendable. He personoally ensured that every student received the attention they needed to succeed.",
+            author: "Ahsan Ali",
+            role: "Chapter Head, The Citizens Foundation (TCF)"
         }
     ],
 
@@ -180,10 +185,10 @@ const portfolioData = {
             icon: "⚙️",
             items: [
                 { name: "Node.js/Express", level: 90 },
-                { name: "TypeScript", level: 90 },
-                { name: "Java (Quarkus)", level: 80 },
-                { name: "ASP.NET Core (C#)", level: 80 },
-                { name: "Python", level: 65 }
+                { name: "JavaScript", level: 90 },
+                { name: "Java 17+", level: 90 },
+                { name: "ASP.NET Core (C#)", level: 70 },
+                { name: "Python", level: 75 }
             ]
         },
         {
@@ -194,18 +199,19 @@ const portfolioData = {
                 { name: "Vue.js", level: 75 },
                 { name: "JavaScript (ES6+)", level: 90 },
                 { name: "HTML5/CSS", level: 85 },
-                { name: "XState/Redux", level: 80 }
+                { name: "XState/Redux", level: 80 },
+                { name: "Vuex", level: 80 }
             ]
         },
         {
             category: "Databases",
             icon: "🗄️",
             items: [
-                { name: "SQL Server", level: 85 },
+                { name: "SQL Server/IBM DB2", level: 85 },
                 { name: "PostgreSQL", level: 85 },
                 { name: "MySQL/SQLite", level: 80 },
                 { name: "MongoDB", level: 75 },
-                { name: "Firebase", level: 70 }
+                { name: "Firebase/Supabase", level: 70 }
             ]
         },
         {
@@ -214,7 +220,7 @@ const portfolioData = {
             items: [
                 { name: "Docker", level: 85 },
                 { name: "GitHub Actions/GitLab CI", level: 85 },
-                { name: "Nginx/Linux", level: 80 },
+                { name: "Nginx/Linux/Caddy", level: 80 },
                 { name: "Jest/Playwright", level: 85 },
                 { name: "Git", level: 90 }
             ]
@@ -231,7 +237,7 @@ const portfolioData = {
         },
         {
             title: "Full-Stack Proficiency",
-            description: "Strong with Node.js/TypeScript, ASP.NET Core, React/Next.js, and modern testing practices (Jest/Playwright).",
+            description: "Strong with Node.js/JavaScript, ASP.NET Core, React/Next.js, and modern testing practices (Jest/Playwright).",
             link: "#skills",
             linkText: "Explore my skills →"
         },
