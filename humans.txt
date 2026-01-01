@@ -1,0 +1,20 @@
+/* TEAM */
+Developer: Syed Talha Ahmed Gardazi
+Role: Full-Stack Software Engineer
+Location: Budapest, Hungary
+Contact: smilingtalha@gmail.com
+GitHub: github.com/stag7824
+LinkedIn: linkedin.com/in/stagify
+Twitter: @stagifyy
+
+/* SITE */
+Last update: 2026/01/01
+Language: English
+Standards: HTML5, CSS3, JavaScript ES6+
+Components: Vanilla JS, CSS Grid, Flexbox
+IDE: Visual Studio Code
+
+/* THANKS */
+Fonts: Google Fonts (Inter, JetBrains Mono)
+Icons: Custom SVG icons
+Inspiration: Modern developer portfolios

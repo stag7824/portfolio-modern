@@ -1,0 +1,27 @@
+{
+    "name": "Syed Talha Ahmed Gardazi - Portfolio",
+    "short_name": "Talha Portfolio",
+    "description": "Full-Stack Software Engineer with 3+ years in fintech building high-throughput reporting and loan systems.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a0f",
+    "theme_color": "#6366f1",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en",
+    "categories": ["portfolio", "developer", "software engineer"],
+    "icons": [
+        {
+            "src": "assets/icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

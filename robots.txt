@@ -1,0 +1,34 @@
+# robots.txt for portfolio.bugbrew.tech
+# Syed Talha Ahmed Gardazi - Portfolio Website
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://portfolio.bugbrew.tech/sitemap.xml
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Block common bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Crawl delay for polite bots
+Crawl-delay: 1

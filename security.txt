@@ -1,0 +1,7 @@
+# Security Policy for portfolio.bugbrew.tech
+# See https://securitytxt.org/ for more information
+
+Contact: mailto:smilingtalha@gmail.com
+Preferred-Languages: en
+Canonical: https://portfolio.bugbrew.tech/.well-known/security.txt
+Expires: 2027-01-01T00:00:00.000Z

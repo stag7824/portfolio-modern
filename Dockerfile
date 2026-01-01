@@ -8,6 +8,13 @@ COPY script.js /usr/share/nginx/html/
 COPY data.js /usr/share/nginx/html/
 COPY assets/ /usr/share/nginx/html/assets/
 
+# Copy SEO and web standard files
+COPY sitemap.xml /usr/share/nginx/html/
+COPY robots.txt /usr/share/nginx/html/
+COPY manifest.json /usr/share/nginx/html/
+COPY humans.txt /usr/share/nginx/html/
+COPY security.txt /usr/share/nginx/html/
+
 # Create custom nginx config to serve on port 3000
 RUN echo 'server { \
     listen 3000; \
