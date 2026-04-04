@@ -23,17 +23,17 @@
     <meta name="twitter:description" content="Full-Stack Software Engineer with 3+ years in fintech building high-throughput reporting and loan systems.">
     <meta name="twitter:image" content="https://portfolio.bugbrew.tech/assets/og-image.png">
 
-    <meta name="theme-color" content="#FAFAF8" id="themeColor">
+    <meta name="theme-color" content="#FAFAF8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Talha Gardazi">
-    <meta name="color-scheme" content="light dark">
+    <meta name="color-scheme" content="light">
 
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect rx='20' width='100' height='100' fill='%23141414'/%3E%3Ctext x='50' y='70' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='900' font-size='50' fill='white'%3ETG%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>T</text></svg>">
 
     <script type="application/ld+json">
     {
@@ -57,23 +57,8 @@
             "https://github.com/stag7824",
             "https://linkedin.com/in/stagify"
         ],
-        "knowsAbout": ["Node.js","TypeScript","React","Spring Boot","ASP.NET Core","Docker","Microservices","Fintech","GCP","Open Telekom Cloud"],
-        "hasCredential": [
-            { "@type": "EducationalOccupationalCredential", "name": "Google Associate Cloud Engineer", "credentialCategory": "Professional Certification", "url": "https://www.credly.com/badges/5840c2b4-97d8-45d8-a01d-d1412f4e7eb7/public_url" },
-            { "@type": "EducationalOccupationalCredential", "name": "Open Telekom Cloud Architect", "credentialCategory": "Professional Certification", "url": "https://training.open-telekom-cloud.com/certificates/serial/0e6f847ccf761e10683b3e23e45d8ec9" },
-            { "@type": "EducationalOccupationalCredential", "name": "Certified in Cybersecurity (CC)", "credentialCategory": "Professional Certification", "url": "https://www.credly.com/badges/4114c169-ff9b-4546-b8c8-ab3c4587de4b/public_url" }
-        ]
+        "knowsAbout": ["Node.js","TypeScript","React","Spring Boot","ASP.NET Core","Docker","Microservices","Fintech"]
     }
-    </script>
-
-    <!-- Inline critical: prevent flash of wrong theme -->
-    <script>
-        (function(){
-            var t = localStorage.getItem('theme');
-            if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme:dark)').matches)) {
-                document.documentElement.setAttribute('data-theme','dark');
-            }
-        })();
     </script>
 </head>
 <body>
@@ -81,16 +66,9 @@
     <!-- Header -->
     <header class="header" id="header">
         <nav class="nav container">
-            <a href="#" class="logo" id="logo">
-                <span class="logo-mark">TG</span>
-                <span class="logo-text">Talha Gardazi</span>
-            </a>
+            <a href="#" class="logo" id="logo">Talha Gardazi</a>
             <div class="nav-links" id="navLinks"></div>
             <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                </button>
                 <a href="#contact" class="nav-cta">Get in Touch</a>
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
                     <span></span>
@@ -102,14 +80,14 @@
 
     <main>
         <!-- Hero -->
-        <section class="hero dot-bg" id="home">
+        <section class="hero" id="home">
             <div class="container hero-container">
                 <div class="hero-badge" id="heroBadge">
                     <span class="badge-dot"></span>
                     Open to opportunities
                 </div>
-                <h1 class="hero-heading" id="heroHeading">Full-Stack Software<br><span class="text-accent">Engineer</span></h1>
-                <p class="hero-sub" id="heroSub">3 years building high-throughput reporting systems, loan origination platforms, and 10+ microservices at Bank Al Habib. Currently pursuing MSc at ELTE, Budapest. Open to relocate.</p>
+                <h1 class="hero-heading" id="heroHeading">Full-Stack Software<br>Engineer</h1>
+                <p class="hero-sub" id="heroSub">3+ years building high-throughput reporting systems, loan origination platforms, and scalable microservices in fintech. Currently pursuing MSc at ELTE, Budapest.</p>
                 <div class="hero-actions">
                     <a href="#contact" class="btn btn-dark">Get in Touch <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     <a href="#projects" class="btn btn-outline">View My Work</a>
@@ -122,8 +100,8 @@
             <div class="container">
                 <div class="stats-row" id="statsRow">
                     <div class="stat-item">
-                        <span class="stat-number">5,000+</span>
-                        <span class="stat-label">Statements/Month</span>
+                        <span class="stat-number">3+</span>
+                        <span class="stat-label">Years Experience</span>
                     </div>
                     <div class="stat-divider"></div>
                     <div class="stat-item">
@@ -174,24 +152,13 @@
         </section>
 
         <!-- Projects -->
-        <section class="projects dot-bg" id="projects">
+        <section class="projects" id="projects">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-heading">Featured<br>Projects</h2>
                     <p class="section-desc">A selection of projects spanning full-stack development, enterprise platforms, and open-source work.</p>
                 </div>
-            </div>
-            <div class="hscroll-wrapper" id="hscrollWrapper">
-                <div class="hscroll-track" id="projectsGrid"></div>
-            </div>
-            <div class="container">
-                <div class="hscroll-nav">
-                    <div class="hscroll-dots" id="hscrollDots"></div>
-                    <div class="hscroll-arrows">
-                        <button class="hscroll-arrow" id="hscrollPrev" aria-label="Previous project"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
-                        <button class="hscroll-arrow" id="hscrollNext" aria-label="Next project"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-                    </div>
-                </div>
+                <div class="projects-grid" id="projectsGrid"></div>
             </div>
         </section>
 
@@ -222,21 +189,17 @@
                     <h2 class="section-heading">Education &amp;<br>Certifications</h2>
                 </div>
                 <div class="edu-grid">
-                    <div class="edu-card reveal">
-                        <div class="edu-icon">
-                            <img src="https://www.elte.hu/sites/default/files/ELTE/images/2025-11/ELTE.elte_fekvo_kek_logo.png" alt="ELTE" class="logo-invertible">
-                        </div>
+                    <div class="edu-card">
+                        <div class="edu-icon">&#127469;&#127482;</div>
                         <div class="edu-body">
-                            <h3>Eötvös Loránd University (ELTE)</h3>
+                            <h3>Eotvos Lorand University (ELTE)</h3>
                             <p class="edu-degree">MSc, Computer Science for Autonomous Systems</p>
                             <p class="edu-meta">Budapest &middot; Sep 2025 &ndash; Present</p>
                             <p class="edu-detail">Advanced Algorithms, Software Quality &amp; Testing, Data Science, Deep Reinforcement Learning</p>
                         </div>
                     </div>
-                    <div class="edu-card reveal" data-delay="1">
-                        <div class="edu-icon">
-                            <img src="https://www.iba.edu.pk/images/logo-iba-70years.png" alt="IBA Karachi" class="logo-on-light">
-                        </div>
+                    <div class="edu-card">
+                        <div class="edu-icon">&#127891;</div>
                         <div class="edu-body">
                             <h3>Institute of Business Administration (IBA)</h3>
                             <p class="edu-degree">BS, Computer Science</p>
@@ -244,36 +207,17 @@
                             <p class="edu-detail">Cloud Computing, Network Security, Data Warehousing, Mobile App Development</p>
                         </div>
                     </div>
-                    <div class="edu-card cert-card reveal" data-delay="2">
-                        <div class="edu-icon">
-                            <a href="https://www.credly.com/badges/5840c2b4-97d8-45d8-a01d-d1412f4e7eb7/public_url" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="GCP">
-                            </a>
-                        </div>
+                    <div class="edu-card cert-card">
+                        <div class="edu-icon">&#9729;&#65039;</div>
                         <div class="edu-body">
-                            <h3><a href="https://www.credly.com/badges/5840c2b4-97d8-45d8-a01d-d1412f4e7eb7/public_url" target="_blank" rel="noopener noreferrer" class="cert-link">Google Associate Cloud Engineer</a></h3>
+                            <h3>Google Associate Cloud Engineer</h3>
                             <p class="edu-degree">Google Cloud Platform (GCP)</p>
                         </div>
                     </div>
-                    <div class="edu-card cert-card reveal" data-delay="3">
-                        <div class="edu-icon">
-                            <a href="https://training.open-telekom-cloud.com/certificates/serial/0e6f847ccf761e10683b3e23e45d8ec9" target="_blank" rel="noopener noreferrer">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/T-Mobile_logo_2022.svg" alt="Open Telekom Cloud">
-                            </a>
-                        </div>
+                    <div class="edu-card cert-card">
+                        <div class="edu-icon">&#128737;&#65039;</div>
                         <div class="edu-body">
-                            <h3><a href="https://training.open-telekom-cloud.com/certificates/serial/0e6f847ccf761e10683b3e23e45d8ec9" target="_blank" rel="noopener noreferrer" class="cert-link">Open Telekom Cloud Architect</a></h3>
-                            <p class="edu-degree">T-Systems International &middot; Mar 2026</p>
-                        </div>
-                    </div>
-                    <div class="edu-card cert-card reveal" data-delay="4">
-                        <div class="edu-icon">
-                            <a href="https://www.credly.com/badges/4114c169-ff9b-4546-b8c8-ab3c4587de4b/public_url" target="_blank" rel="noopener noreferrer">
-                                <svg viewBox="0 0 24 24" fill="none" width="40" height="40"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" fill="var(--accent)" opacity=".15"/><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" stroke="var(--accent)" stroke-width="1.5" fill="none"/><path d="M9 12l2 2 4-4" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            </a>
-                        </div>
-                        <div class="edu-body">
-                            <h3><a href="https://www.credly.com/badges/4114c169-ff9b-4546-b8c8-ab3c4587de4b/public_url" target="_blank" rel="noopener noreferrer" class="cert-link">Certified in Cybersecurity (CC)</a></h3>
+                            <h3>Certified in Cybersecurity (CC)</h3>
                             <p class="edu-degree">ISC2</p>
                         </div>
                     </div>
@@ -282,11 +226,11 @@
         </section>
 
         <!-- Contact -->
-        <section class="contact dot-bg" id="contact">
+        <section class="contact" id="contact">
             <div class="container">
                 <div class="contact-inner">
-                    <h2 class="section-heading">Let's Build<br>Something <span class="text-accent">Great</span></h2>
-                    <p class="contact-desc" id="contactDesc">Open for backend/full-stack roles in Europe — willing to relocate.</p>
+                    <h2 class="section-heading">Let's Build<br>Something Great</h2>
+                    <p class="contact-desc" id="contactDesc">Open for senior backend roles, technical consulting, and interesting collaboration opportunities.</p>
                     <div class="contact-grid" id="contactGrid"></div>
                     <div class="contact-cta">
                         <a href="mailto:smilingtalha@gmail.com" class="btn btn-dark btn-lg" id="ctaEmailBtn">Send me an email <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
@@ -301,10 +245,7 @@
         <div class="container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <a href="#" class="logo">
-                        <span class="logo-mark">TG</span>
-                        <span class="logo-text">Talha Gardazi</span>
-                    </a>
+                    <a href="#" class="footer-logo">Talha Gardazi</a>
                     <p class="footer-tagline">Full-Stack Software Engineer</p>
                 </div>
                 <div class="footer-col">
@@ -322,13 +263,10 @@
                 <div class="footer-col">
                     <h4>Location</h4>
                     <p class="footer-location">Budapest, Hungary</p>
-                    <p class="footer-location">Open to Relocate</p>
-
                 </div>
-                
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Syed Talha Ahmed Gardazi</p>
+                <p>&copy; 2025 Syed Talha Ahmed Gardazi</p>
             </div>
         </div>
     </footer>
