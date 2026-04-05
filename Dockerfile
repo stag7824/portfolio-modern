@@ -6,6 +6,7 @@ COPY index.html /usr/share/nginx/html/
 COPY styles.css /usr/share/nginx/html/
 COPY script.js /usr/share/nginx/html/
 COPY data.js /usr/share/nginx/html/
+COPY data/ /usr/share/nginx/html/data/
 COPY assets/ /usr/share/nginx/html/assets/
 
 # Copy SEO and web standard files
