@@ -280,10 +280,9 @@ function initTheme() {
         if (meta) meta.content = theme === 'dark' ? '#0A0A0A' : '#FAFAF8';
     }
 
-    // If no preference saved, respect system
+    // Default to light mode unless user explicitly chose a theme
     if (!localStorage.getItem('theme')) {
-        const prefersDark = matchMedia('(prefers-color-scheme:dark)').matches;
-        setTheme(prefersDark ? 'dark' : 'light');
+        setTheme('light');
     }
 
     if (toggle) {
