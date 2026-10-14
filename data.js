@@ -16,7 +16,7 @@ const portfolioData = {
         location: "Budapest, Hungary",
         phone: "+36 70 882 8693",
         email: "smilingtalha@gmail.com",
-        website: "portfolio.bugbrew.tech",
+        website: "gardazi.com",
         available: true,
         availabilityNote: "Open for backend/full-stack roles in Europe — willing to relocate."
     },
@@ -27,8 +27,10 @@ const portfolioData = {
         githubHandle: "@stag7824",
         linkedin: "https://linkedin.com/in/stagify",
         linkedinHandle: "/in/stagify",
-        portfolio: "https://portfolio.bugbrew.tech",
-        portfolioHandle: "portfolio.bugbrew.tech",
+        portfolio: "https://gardazi.com",
+        portfolioHandle: "gardazi.com",
+        blog: "https://blogs.gardazi.com",
+        blogHandle: "blogs.gardazi.com",
         twitter: "stagifyy",
         twitterHandle: "@stagifyy"
     },
@@ -37,8 +39,10 @@ const portfolioData = {
     navigation: [
         { label: "About", href: "#about" },
         { label: "Experience", href: "#experience" },
+        { label: "Open Source", href: "#open-source" },
         { label: "Projects", href: "#projects" },
         { label: "Skills", href: "#skills" },
+        { label: "Blog", href: "https://blogs.gardazi.com", external: true },
         { label: "Contact", href: "#contact", isCta: true }
     ],
 
@@ -141,6 +145,65 @@ const portfolioData = {
             quote: "Talha's ability to go above and beyond in every task he undertakes is truly commendable. He personally ensured that every student received the attention they needed to succeed.",
             author: "Ahsan Ali",
             role: "Chapter Head, The Citizens Foundation (TCF)"
+        }
+    ],
+
+    // Open source contributions (merged upstream PRs)
+    openSource: [
+        {
+            project: "Apache CloudStack",
+            org: "Apache Software Foundation",
+            title: "Fixed a missing UI label, traced to its origin",
+            url: "https://github.com/apache/cloudstack/pull/14163",
+            pr: "#14163",
+            merged: "Oct 2026",
+            points: [
+                "The Resource Limits tab showed a raw translation key (label.maxbackup) for the backup limit row, and a reviewer could not reproduce it on the project's QA site",
+                "Traced it through git history to a 4.22.0.0 key rename that missed this tab; both keys are needed because each is built from a different API name",
+                "Reproduced it on an unmodified 4.22 UI and supplied before/after evidence; approved by a PMC member and merged by a committer"
+            ],
+            technologies: ["Vue", "i18n", "Java", "git history analysis"]
+        },
+        {
+            project: "Apache DataFusion Ballista",
+            org: "Apache Software Foundation",
+            title: "Fixed a Cargo feature that silently didn't propagate",
+            url: "https://github.com/apache/datafusion-ballista/pull/2373",
+            pr: "#2373",
+            merged: "Sep 2026",
+            points: [
+                "The executor's arrow-ipc-optimizations feature was declared empty, so enabling it never reached ballista-core",
+                "Forwarded the feature and restored it in the examples manifest; proved before/after with cargo tree -e features",
+                "Diagnosed an unrelated CI failure (MinIO pulled its Docker Hub image) as branch staleness and got CI to 27/27 green"
+            ],
+            technologies: ["Rust", "Cargo", "CI debugging"]
+        },
+        {
+            project: "nanocoder",
+            org: "Nano Collective",
+            title: "Fixed metadata-only detection in the read_file tool",
+            url: "https://github.com/Nano-Collective/nanocoder/pull/987",
+            pr: "#987",
+            merged: "Sep 2026",
+            points: [
+                "read_file inferred \"metadata only\" from the output instead of the request flag, misformatting those reads",
+                "Switched detection to the metadata_only flag and added regression tests for the path no test covered; two rounds of maintainer review",
+                "Invited by the maintainer onto the project's official contributors page afterwards"
+            ],
+            technologies: ["TypeScript", "Unit testing", "Code review"]
+        },
+        {
+            project: "Hiero Java SDK (Hedera)",
+            org: "Linux Foundation Decentralized Trust",
+            title: "Documentation fix under DCO and signed commits",
+            url: "https://github.com/hiero-ledger/hiero-sdk-java/pull/2934",
+            pr: "#2934",
+            merged: "Sep 2026",
+            points: [
+                "Fixed a typo in the BaseNodeAddress Javadoc",
+                "Met the project's DCO sign-off and cryptographically signed commit requirements with SSH commit signing"
+            ],
+            technologies: ["Java", "DCO", "Signed commits"]
         }
     ],
 
@@ -316,7 +379,7 @@ const portfolioData = {
 
     // Footer
     footer: {
-        copyright: "© 2025 Syed Talha Ahmed Gardazi. Built with passion and clean code.",
+        copyright: "© 2026 Syed Talha Ahmed Gardazi. Built with passion and clean code.",
         badges: [
             { icon: "🚀", text: "Java/Spring Boot" },
             { icon: "🛡️", text: "Production Ready" }

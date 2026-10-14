@@ -684,6 +684,22 @@ ul, ol { list-style:none; }
     font-size: .9rem;
     color: var(--text-2);
 }
+.section-desc a {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.oss-pr {
+    font-size: .8125rem;
+    font-weight: 500;
+    color: var(--text-3);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-left: 4px;
+}
+.oss-pr:hover {
+    color: var(--text);
+}
 .exp-duration {
     font-size: .8125rem;
     color: var(--text-3);

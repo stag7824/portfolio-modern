@@ -76,6 +76,9 @@ function populateAll() {
     /* Experience */
     populateExperience(d);
 
+    /* Open source */
+    populateOpenSource(d);
+
     /* Projects */
     populateProjects(d);
 
@@ -99,8 +102,13 @@ function populateNav(d) {
     if (!nav || !d.navigation) return;
     nav.innerHTML = d.navigation
         .filter(i => !i.isCta)
-        .map(i => '<a href="' + i.href + '">' + i.label + '</a>')
+        .map(navLink)
         .join('');
+}
+
+function navLink(i) {
+    const ext = i.external ? ' target="_blank" rel="noopener noreferrer"' : '';
+    return '<a href="' + i.href + '"' + ext + '>' + i.label + '</a>';
 }
 
 /* ── Logos ─────────────────────────────────────── */
@@ -157,6 +165,31 @@ function populateExperience(d) {
             '</div>' +
         '</div>';
     }).join('');
+}
+
+/* ── Open source (reuses experience cards) ─────── */
+function populateOpenSource(d) {
+    const list = document.getElementById('ossList');
+    if (!list || !d.openSource) return;
+    list.innerHTML = d.openSource.map((o, i) =>
+        '<div class="exp-card reveal" data-delay="' + Math.min(i, 3) + '">' +
+            '<div class="exp-header">' +
+                '<div class="exp-header-left">' +
+                    '<div>' +
+                        '<h3>' + o.project + ' <a href="' + o.url + '" class="oss-pr" target="_blank" rel="noopener noreferrer">' + o.pr + '</a></h3>' +
+                        '<span class="exp-role">' + o.title + ' · ' + o.org + '</span>' +
+                    '</div>' +
+                '</div>' +
+                '<span class="exp-duration">Merged ' + o.merged + '</span>' +
+            '</div>' +
+            '<ul class="exp-achievements">' +
+                o.points.map(p => '<li>' + p + '</li>').join('') +
+            '</ul>' +
+            '<div class="exp-tags">' +
+                o.technologies.map(t => '<span>' + t + '</span>').join('') +
+            '</div>' +
+        '</div>'
+    ).join('');
 }
 
 /* ── Projects (horizontal scroll cards) ────────── */
@@ -234,6 +267,9 @@ function populateContact(d) {
     if (s.portfolio) {
         cards.push({ icon: ICONS.globe, title: 'Portfolio', link: 'https://' + s.portfolioHandle, label: s.portfolioHandle });
     }
+    if (s.blog) {
+        cards.push({ icon: ICONS.globe, title: 'Blog', link: s.blog, label: s.blogHandle });
+    }
 
     grid.innerHTML = cards.map(c =>
         '<div class="contact-card">' +
@@ -248,9 +284,7 @@ function populateContact(d) {
 function populateFooterNav(d) {
     const nav = document.getElementById('footerNav');
     if (!nav || !d.navigation) return;
-    nav.innerHTML = d.navigation.map(i =>
-        '<a href="' + i.href + '">' + i.label + '</a>'
-    ).join('');
+    nav.innerHTML = d.navigation.map(navLink).join('');
 }
 
 function populateFooterConnect(d) {
@@ -261,6 +295,8 @@ function populateFooterConnect(d) {
     const em = document.getElementById('footerEmail');
     if (gh) gh.href = s.github;
     if (li) li.href = s.linkedin;
+    const bl = document.getElementById('footerBlog');
+    if (bl && s.blog) bl.href = s.blog;
     if (em && d.personal?.email) em.href = 'mailto:' + d.personal.email;
 }
 

@@ -1,4 +1,4 @@
-# robots.txt for portfolio.bugbrew.tech
+# robots.txt for gardazi.com
 # Syed Talha Ahmed Gardazi - Portfolio Website
 
 User-agent: *
@@ -6,7 +6,7 @@ Allow: /
 Disallow: /assets/icons/
 
 # Sitemap location
-Sitemap: https://portfolio.bugbrew.tech/sitemap.xml
+Sitemap: https://gardazi.com/sitemap.xml
 
 # Allow all major search engines
 User-agent: Googlebot
