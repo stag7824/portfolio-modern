@@ -26,8 +26,14 @@ RUN echo 'server { \
     add_header X-Content-Type-Options "nosniff" always; \
     add_header Referrer-Policy "strict-origin-when-cross-origin" always; \
     \
-    # Cache static assets aggressively \
-    location ~* \.(css|js|svg|png|jpg|jpeg|webp|ico|woff2?)$ { \
+    # CSS/JS are not fingerprinted, so keep their cache short \
+    location ~* \.(css|js)$ { \
+        root /usr/share/nginx/html; \
+        add_header Cache-Control "public, max-age=300, must-revalidate"; \
+    } \
+    \
+    # Cache images and fonts aggressively \
+    location ~* \.(svg|png|jpg|jpeg|webp|ico|woff2?)$ { \
         root /usr/share/nginx/html; \
         expires 30d; \
         add_header Cache-Control "public, immutable"; \
