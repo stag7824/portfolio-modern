@@ -204,6 +204,20 @@ const portfolioData = {
                 "Met the project's DCO sign-off and cryptographically signed commit requirements with SSH commit signing"
             ],
             technologies: ["Java", "DCO", "Signed commits"]
+        },
+        {
+            project: "Apache CloudStack",
+            org: "Apache Software Foundation",
+            title: "Three more fixes in review",
+            url: "https://github.com/apache/cloudstack/pulls?q=is%3Apr+author%3Astag7824",
+            pr: "3 open PRs",
+            status: "In review",
+            points: [
+                "#14293: a domain's bucket, object storage and backup limits were always reported as Unlimited because of an account-vs-domain lookup; full CI and packaging passed",
+                "#14096: NAS backup restore failed when stored mount options carried stray whitespace; moved the fix server-side after review, with unit tests",
+                "#14152: the whole console failed to load when a role denied listLdapConfigurations"
+            ],
+            technologies: ["Java", "Vue", "Unit testing"]
         }
     ],
 
@@ -216,7 +230,7 @@ const portfolioData = {
             technologies: ["Three.js", "JavaScript", "HTML5", "CSS3"],
             stars: "-",
             forks: "-",
-            github: "https://github.com/stag7824/3D-portfolio.git"
+            github: "https://github.com/stag7824/3D-portfolio"
         },
 
         {
@@ -226,7 +240,17 @@ const portfolioData = {
             technologies: ["HTML5", "CSS3", "JavaScript"],
             stars: "-",
             forks: "-",
-            github: "https://github.com/stag7824/portfolio-modern.git"
+            github: "https://github.com/stag7824/portfolio-modern"
+        },
+
+        {
+            title: "Autobot: LinkedIn Easy Apply Bot",
+            icon: "🤖",
+            description: "Automates LinkedIn Easy Apply with AI-filled application forms (Gemini / OpenRouter), keyword and experience filters, crash-safe state, ntfy push alerts and a Docker setup for running on a VPS.",
+            technologies: ["Node.js", "Puppeteer", "Gemini API", "Docker"],
+            stars: "-",
+            forks: "-",
+            github: "https://github.com/stag7824/Autobot_linkedIn"
         },
 
         {

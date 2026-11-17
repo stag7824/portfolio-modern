@@ -180,7 +180,7 @@ function populateOpenSource(d) {
                         '<span class="exp-role">' + o.title + ' · ' + o.org + '</span>' +
                     '</div>' +
                 '</div>' +
-                '<span class="exp-duration">Merged ' + o.merged + '</span>' +
+                '<span class="exp-duration">' + (o.status || 'Merged ' + o.merged) + '</span>' +
             '</div>' +
             '<ul class="exp-achievements">' +
                 o.points.map(p => '<li>' + p + '</li>').join('') +
