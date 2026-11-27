@@ -201,9 +201,9 @@ const portfolioData = {
         {
             project: "Apache CloudStack",
             org: "Apache Software Foundation",
-            title: "Six more fixes in review, three approved",
+            title: "More fixes approved or in review",
             url: "https://github.com/apache/cloudstack/pulls?q=is%3Apr+author%3Astag7824",
-            pr: "6 open PRs",
+            pr: "Open PRs",
             status: "In review",
             points: [
                 "#14293 (approved): a domain's bucket, object storage and backup limits were reported wrongly because of an account-vs-domain lookup; a committer verified the fix on a KVM lab",
