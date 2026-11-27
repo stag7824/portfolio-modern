@@ -226,6 +226,16 @@ const portfolioData = {
     // Projects
     projects: [
         {
+            title: "merge-radar",
+            icon: "📡",
+            description: "Finds open source issues nobody has claimed, in projects that actually merge pull requests from outsiders. Scores repositories on outsider merges and time to merge, reads issue timelines to detect claims, and runs as a CLI or a weekly GitHub Action. Conditional requests with an ETag cache make repeat runs cost no API quota.",
+            technologies: ["Java 21", "Virtual threads", "GitHub API", "SQLite", "GitHub Actions", "Docker"],
+            stars: "-",
+            forks: "-",
+            github: "https://github.com/stag7824/merge-radar"
+        },
+
+        {
             title: "3D Portfolio Website (Old Version)",
             icon: "🌐",
             description: "Personal portfolio with interactive 3D elements, music, and responsive design. Showcases projects and skills effectively.",
