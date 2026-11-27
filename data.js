@@ -72,13 +72,6 @@ const portfolioData = {
         { name: "ELTE Budapest", icon: "https://www.elte.hu/sites/default/files/ELTE/images/2025-11/ELTE.elte_fekvo_kek_logo.png" }
     ],
 
-    // Performance Metrics (shown in terminal demo)
-    metrics: [
-        { label: "API Latency", value: "15ms p99", percentage: 15, status: "good" },
-        { label: "Throughput", value: "500K RPS", percentage: 95, status: "normal" },
-        { label: "Uptime", value: "99.99%", percentage: 99.99, status: "good" }
-    ],
-
     // Experience/Work History
     experience: [
         {
