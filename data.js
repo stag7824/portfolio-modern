@@ -201,15 +201,16 @@ const portfolioData = {
         {
             project: "Apache CloudStack",
             org: "Apache Software Foundation",
-            title: "Five more fixes in review, three approved",
+            title: "Six more fixes in review, three approved",
             url: "https://github.com/apache/cloudstack/pulls?q=is%3Apr+author%3Astag7824",
-            pr: "5 open PRs",
+            pr: "6 open PRs",
             status: "In review",
             points: [
                 "#14293 (approved): a domain's bucket, object storage and backup limits were reported wrongly because of an account-vs-domain lookup; a committer verified the fix on a KVM lab",
                 "#14723 (approved): long S3 presigned template URLs failed to register because the database column held half of what the API accepted; verified on MySQL 8, upgrade tested by a committer",
                 "#14152 (approved): the whole console failed to load when a role denied listLdapConfigurations",
                 "#14722: the VM console failed with \"Duplicate key\" when a VM detail was stored twice; tests reproduce the reporter's exact error",
+                "#14889: the KVM agent looked up the storage pool once per volume when collecting volume stats, and lost every volume's stats when one failed; now one lookup per command, with tests",
                 "#14096: NAS backup restore failed when stored mount options carried stray whitespace; moved the fix server-side after review, with unit tests"
             ],
             technologies: ["Java", "Vue", "Unit testing"]
